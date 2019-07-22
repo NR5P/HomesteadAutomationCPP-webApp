@@ -14,8 +14,13 @@ export class Device {
         let btnElement = document.createElement("button");
         let btnTxt = document.createTextNode(this.name);
         btnElement.appendChild(btnTxt);
-        btnElement.setAttribute("id", "deviceBtn");
+        btnElement.setAttribute("class", "deviceBtn");
         btnElement.setAttribute("style", `background-color: ${this.btnColor}`);
+        btnElement.setAttribute("class", `${this.class}`)
+
+        btnElement.addEventListener("click", this.renderDeviceSettings);
+            
+
         document.getElementById("main-area").appendChild(btnElement);
     }
 
@@ -23,8 +28,8 @@ export class Device {
      * render settings under button on main page to allow adjustment of 
      * the device
      *********************************************************************/
-    renderDeviceSettings() {
-
+    renderDeviceSettings(event) {
+        console.log(event)
     }
 
 };

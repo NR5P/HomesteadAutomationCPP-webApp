@@ -15,7 +15,8 @@ export class IrrigationDevice extends Device{
         this.blackoutStopTime = blackoutStopTime;
         this.whenCreated;
         this.btnColor = "blue";
-
+        this.class = "irrigation-device-btn";
+            
         this.renderBtn();
     }
 };
