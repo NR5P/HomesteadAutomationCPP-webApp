@@ -13,7 +13,6 @@ export class IrrigationDevice extends Device{
         this.cycleOffTime = cycleOffTime;
         this.blackoutStartTime = blackoutStartTime;
         this.blackoutStopTime = blackoutStopTime;
-        this.whenCreated;
         this.btnColor = "blue";
         this.class = "irrigation-device-btn";
             
@@ -47,4 +46,35 @@ export class IrrigationDevice extends Device{
         `;
     }
 
+    getCycleOnTime() {
+        return new Date(this.cycleOnTime);
+    }
+
+    getCycleOffTime() {
+        return new Date(this.cycleOffTime);
+    }
+
+    getBlackoutStartTime() {
+        return new Date(this.blackoutStartTime);
+    }
+
+    getBlackoutStopTime() {
+        return new Date(this.blackoutStopTime);
+    }
+
+    setCycleOnTime(time) {
+        this.cycleOnTime = new Date();
+    }
+
+    setCycleOffTime(time) {
+
+    }
+
+    setBlackoutStartTime(time) {
+
+    }
+
+    setBlackoutStopTime(time) {
+
+    }
 };
