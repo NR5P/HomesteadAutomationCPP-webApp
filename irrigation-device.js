@@ -19,4 +19,32 @@ export class IrrigationDevice extends Device{
             
         this.renderBtn();
     }
+
+    /**********************************************************************
+     * render settings under button on main page to allow adjustment of 
+     * the device
+     *********************************************************************/
+    renderDeviceSettings(event) {
+        //console.log(event.target);
+        //event.target.innerHTML = "something";
+        //console.log(this.name); // does not know the name here
+        //this.name = "something";
+        //console.log(this.name); // does not know the name here
+        //event.target.innerHTML = "something";
+        //console.log(Device.deviceList);
+
+        let form = `
+            <form> 
+                <label for="name">Name: </label>           
+                <input type="text" id="name" name="name" value="${this.name}">
+
+                <label for="pin">Pin: </label>           
+                <input type="number" id="pin" name="pin" value="${this.pin}">
+
+                <label for="notes">Notes: </label>           
+                <input type="textarea" id="notes" name="notes" value="${this.notes}">
+            </form>
+        `;
+    }
+
 };
