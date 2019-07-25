@@ -42,39 +42,19 @@ export class IrrigationDevice extends Device{
 
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
+
+                <label for="cycleOnTime">Cycle On Time: </label>
+                <input type="time" id"cycleOnTime" name="cycleOnTime" step="1" value="${this.cycleOnTime}">
+
+                <label for="cycleOffTime">Cycle Off Time: </label>
+                <input type="time" id"cycleOffTime" name="cycleOffTime" step="1" value="${this.cycleOffTime}">
+
+                <label for="blackoutStartTime">Blackout Start Time</label>
+                <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="${this.blackoutStartTime}">
+
+                <label for="blackoutStopTime">Blackout Stop Time</label>
+                <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
             </form>
         `;
-    }
-
-    getCycleOnTime() {
-        return new Date(this.cycleOnTime);
-    }
-
-    getCycleOffTime() {
-        return new Date(this.cycleOffTime);
-    }
-
-    getBlackoutStartTime() {
-        return new Date(this.blackoutStartTime);
-    }
-
-    getBlackoutStopTime() {
-        return new Date(this.blackoutStopTime);
-    }
-
-    setCycleOnTime(time) {
-        this.cycleOnTime = new Date();
-    }
-
-    setCycleOffTime(time) {
-
-    }
-
-    setBlackoutStartTime(time) {
-
-    }
-
-    setBlackoutStopTime(time) {
-
     }
 };

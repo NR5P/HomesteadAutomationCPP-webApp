@@ -1,7 +1,5 @@
 export class Device {
 
-    static deviceList = ["this", "that", "the"];
-        
     constructor(id, name, pin, notes) {
         this.id = id;
         this.name = name;
