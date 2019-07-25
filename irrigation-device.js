@@ -31,6 +31,7 @@ export class IrrigationDevice extends Device{
         //console.log(this.name); // does not know the name here
         //event.target.innerHTML = "something";
         //console.log(Device.deviceList);
+        let formElement = document.createElement("form");
 
         let form = `
             <form> 
@@ -54,7 +55,20 @@ export class IrrigationDevice extends Device{
 
                 <label for="blackoutStopTime">Blackout Stop Time</label>
                 <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
+
+                <button type="button" class="form-submit">Submit</button>
+                <button type="button" class="form-cancel">Cancel</button>
+                <button type="button" class="form-delete">Delete</button>
             </form>
         `;
+        formElement.innerHTML = form;
+        
+        if (event.target.nextSibling == null || event.target.nextSibling.tagName != "FORM") {
+            event.target.insertAdjacentElement("afterend", formElement);
+        } else {
+            event.target.parentNode.removeChild(event.target.nextSibling);
+        }
+        console.log(event.target.nextSibling.tagName);
+        console.log(event.target.parentNode);
     }
 };
