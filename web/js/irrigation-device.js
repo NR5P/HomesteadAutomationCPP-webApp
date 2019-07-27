@@ -34,7 +34,7 @@ export class IrrigationDevice extends Device{
         let formElement = document.createElement("form");
 
         let form = `
-            <form> 
+            <form class="deviceForm"> 
                 <label for="name">Name: </label>           
                 <input type="text" id="name" name="name" value="${this.name}">
 
