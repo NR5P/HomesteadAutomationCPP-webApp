@@ -3,7 +3,7 @@ import {Device} from "./device.js"
 /**********************************************************************
  * for timed irrigation control
  *********************************************************************/
-export class IrrigationDevice extends Device{
+export class CycleIrrigationDevice extends Device{
     constructor(id, name, pin, notes, cycleOnTime, cycleOffTime, 
         blackoutStartTime, blackoutStopTime) {
 

@@ -5,6 +5,12 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+//connect to database
+mongoose.connect("mongodb://localhost/homestead", {
+    useNewUrlParser: true
+}).then(() => console.log("mongoDB connected..."))
+  .catch((err) => console.log(err));
+
 /***************handlebars middleware***************************************/
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
