@@ -11,6 +11,12 @@ mongoose.connect("mongodb://localhost/homestead", {
 }).then(() => console.log("mongoDB connected..."))
   .catch((err) => console.log(err));
 
+//load database models
+require("./models/cycleIrrigationSchema");
+require("./models/settingsSchema");
+const cycleIrrigationSchema = mongoose.model("cycleIrrigationSchema");
+const settingsSchema = mongoose.model("settingsSchema");
+
 /***************handlebars middleware***************************************/
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
@@ -18,7 +24,7 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 /****************end middleware**********************************************/
 
-app.use(express.static(path.join(__dirname, "web"))); // static folders
+app.use(express.static(path.join(__dirname, "web"))); // public folders
 
 app.get("/", (req, res) => {
     res.render("index");
