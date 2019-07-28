@@ -6,9 +6,6 @@
     {{/if}}
     >
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password">
-
     <label for="phoneNumber">Phone Number</label>
     <input type="tel" id="phoneNumber" name="phoneNumber"
     {{#if setting}} 
@@ -23,5 +20,27 @@
     {{/if}}
     >
 
+    <label for="city">City</label>
+    <input type="text" id="city" name="city"
+    {{#if setting}}
+    value="{{setting.0.city}}"
+    {{/if}}
+    >
+
+    <label for="state">State</label>
+    <input type="text" id="state" name="state"
+    {{#if setting}}
+    value="{{setting.0.state}}"
+    {{/if}}
+    >
+
+    <label for="zip">Zipcode</label>
+    <input type="zip" id="zip" name="zip"
+    {{#if setting}}
+    value="{{setting.0.zip}}"
+    {{/if}}
+    >
+
     <input type="submit">
+    <button type="button">Update Password</button>
 </form>

@@ -4,19 +4,24 @@ const Schema = mongoose.Schema;
 const settingsSchema = new Schema ({
     userName: {
         type: String,
-        required: false
     },
     phoneNumber: {
         type: String,
-        required: false
     },
     password: {
         type: String,
-        required: false
     },
     email: {
         type: String,
-        required: false
+    },
+    city: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    zip: {
+        type: Number
     }
 })
 
