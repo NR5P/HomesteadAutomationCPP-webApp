@@ -9,17 +9,15 @@ const settingsSchema = new Schema ({
     phoneNumber: {
         type: String,
         required: false
-    }
-    /*
+    },
     password: {
-        type: password,
+        type: String,
         required: false
     },
     email: {
-        type: email,
+        type: String,
         required: false
     }
-    */
 })
 
 mongoose.model("settingsSchema", settingsSchema);

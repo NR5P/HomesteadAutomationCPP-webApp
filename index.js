@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -23,6 +24,10 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 /****************end middleware**********************************************/
+/****************body parser middleware**************************************/
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+/****************************************************************************/
 
 app.use(express.static(path.join(__dirname, "web"))); // public folders
 
@@ -31,8 +36,25 @@ app.get("/", (req, res) => {
 })
 
 app.get("/settings", (req, res) => {
-    res.render("settings");
+    settingsSchema.find({}).then((setting) => {
+        res.render("settings", {
+            setting: setting
+        });
+    });
 })
+
+app.post("/settings", (req, res) => {
+    const newSetting = {
+        userName: req.body.userName,
+        password: req.body.password,
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email
+    }
+    new settingsSchema(newSetting)
+        .save()
+        .then(res.redirect("/")
+    )
+});
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
     
