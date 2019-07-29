@@ -22,6 +22,10 @@ const settingsSchema = new Schema ({
     },
     zip: {
         type: Number
+    },
+    timeFormat24Hr: {
+        type: Boolean,
+        default: false
     }
 })
 

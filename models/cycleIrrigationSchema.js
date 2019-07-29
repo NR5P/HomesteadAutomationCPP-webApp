@@ -18,12 +18,28 @@ const cycleIrrigationSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    cycleOnTime: {
-        type: Date,
+    cycleOnTimeHour: {
+        type: Number,
         required: false
     },
-    cycleOffTime: {
-        type: Date,
+    cycleOnTimeMin: {
+        type: Number,
+        required: false
+    },
+    cycleOnTimeSec: {
+        type: Number,
+        required: false
+    },
+    cycleOffTimeHour: {
+        type: Number,
+        required: false
+    },
+    cycleOffTimeMin: {
+        type: Number,
+        required: false
+    },
+    cycleOffTimeSec: {
+        type: Number,
         required: false
     },
     blackoutStartTime: {

@@ -53,7 +53,8 @@ app.post("/settings", (req, res) => {
         userName: req.body.userName,
         password: req.body.password,
         phoneNumber: req.body.phoneNumber,
-        email: req.body.email
+        email: req.body.email,
+        timeFormat24Hr: req.body.time-format-24
     }
     new settingsSchema(newSetting)
         .save()

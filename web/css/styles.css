@@ -75,11 +75,20 @@ form > label {
     margin: auto;
 }
 
-.hr-min-sec-time {
+/***for the time format selector in settings for 24 hr and 12 formats*/
+.hr-min-sec-time, .time-format-div {
     display: block;
     width: 80%;
     margin: 0 auto;
 }
+
+.time-format-div input[type="radio"] {
+    margin-right: 10px;
+}
+.time-format-label {
+    margin-right: 20px;
+}
+/******************************************************************/
 
 form > div > input {
     padding: 12px 20px;
