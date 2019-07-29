@@ -4,13 +4,17 @@ import {Device} from "./device.js"
  * for timed irrigation control
  *********************************************************************/
 export class CycleIrrigationDevice extends Device{
-    constructor(id, name, pin, notes, cycleOnTime, cycleOffTime, 
-        blackoutStartTime, blackoutStopTime) {
+    constructor(id, name, pin, notes, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec, cycleOffTimeHr,
+        cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) {
 
         super(id, name, pin, notes);
 
-        this.cycleOnTime = cycleOnTime;
-        this.cycleOffTime = cycleOffTime;
+        this.cycleOnTimeHr = cycleOnTimeHr;
+        this.cycleOnTimeMin = cycleOnTimeMin;
+        this.cycleOnTimeSec = cycleOnTimeSec;
+        this.cycleOffTimeHr = cycleOffTimeHr;
+        this.cycleOffTimeMin = cycleOffTimeMin;
+        this.cycleOffTimeSec = cycleOffTimeSec;
         this.blackoutStartTime = blackoutStartTime;
         this.blackoutStopTime = blackoutStopTime;
         this.btnColor = "blue";
@@ -44,11 +48,24 @@ export class CycleIrrigationDevice extends Device{
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
 
-                <label for="cycleOnTime">Cycle On Time: </label>
-                <input type="time" id"cycleOnTime" name="cycleOnTime" step="1" value="${this.cycleOnTime}">
+                <div class="hr-min-sec-time">
+                    <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+                    <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${this.cycleOnTimeHr}">
+                    <span class="colon">:</span>   
+                    <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${this.cycleOnTimeMin}">
+                    <span class="colon">:</span>   
+                    <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
+                </div>
 
-                <label for="cycleOffTime">Cycle Off Time: </label>
-                <input type="time" id"cycleOffTime" name="cycleOffTime" step="1" value="${this.cycleOffTime}">
+                <div class="hr-min-sec-time">
+                    <label for="cycleOffTimeHr">Cycle Off Time Hr:Min:Sec </label>
+                    <input type="number" class"cycleOffTimeHr" name="cycleOffTimeHr" step="1" value="${this.cycleOffTimeHr}">
+                    <span class="colon">:</span>   
+                    <input type="number" class"cycleOffTimeMin" name="cycleOffTimeMin" step="1" value="${this.cycleOffTimeMin}">
+                    <span class="colon">:</span>   
+                    <input type="number" class"cycleOffTimeSec" name="cycleOffTimeSec" step="1" value="${this.cycleOffTimeSec}">
+                </div>
+
 
                 <label for="blackoutStartTime">Blackout Start Time</label>
                 <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="${this.blackoutStartTime}">

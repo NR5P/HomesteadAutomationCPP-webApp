@@ -8,11 +8,24 @@
     <label for="notes">Notes: </label>           
     <input type="textarea" id="notes" name="notes" value="">
 
-    <label for="cycleOnTime">Cycle On Time: </label>
-    <input type="time" id"cycleOnTime" name="cycleOnTime" step="1" value="">
+    <div class="hr-min-sec-time">
+        <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+        <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="">
+    </div>
 
-    <label for="cycleOffTime">Cycle Off Time: </label>
-    <input type="time" id"cycleOffTime" name="cycleOffTime" step="1" value="">
+    <div class="hr-min-sec-time">
+        <label for="cycleOffTimeHr">Cycle Off Time Hr:Min:Sec </label>
+        <input type="number" class"cycleOffTimeHr" name="cycleOffTimeHr" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOffTimeMin" name="cycleOffTimeMin" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOffTimeSec" name="cycleOffTimeSec" step="1" value="">
+    </div>
+
 
     <label for="blackoutStartTime">Blackout Start Time</label>
     <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="">
