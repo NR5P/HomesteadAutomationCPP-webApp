@@ -57,7 +57,7 @@ header > div {
 /*********************************************************************************/
 
 /**individual buttons for different devices, there's a different label for each type**/
-.irrigation-device-btn {
+.cycle-irrigation-device-btn {
     background-image: url(./imgs/icons/irrigation-system.svg);
     background-repeat: no-repeat;
     background-size: 40px auto;

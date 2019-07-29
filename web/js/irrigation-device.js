@@ -3,22 +3,18 @@ import {Device} from "./device.js"
 /**********************************************************************
  * for timed irrigation control
  *********************************************************************/
-export class CycleIrrigationDevice extends Device{
-    constructor(id, name, pin, notes, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec, cycleOffTimeHr,
-        cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) {
+export class IrrigationDevice extends Device{
+    constructor(id, name, pin, notes, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
+        startTimesArray) {
 
         super(id, name, pin, notes);
 
         this.cycleOnTimeHr = cycleOnTimeHr;
         this.cycleOnTimeMin = cycleOnTimeMin;
         this.cycleOnTimeSec = cycleOnTimeSec;
-        this.cycleOffTimeHr = cycleOffTimeHr;
-        this.cycleOffTimeMin = cycleOffTimeMin;
-        this.cycleOffTimeSec = cycleOffTimeSec;
-        this.blackoutStartTime = blackoutStartTime;
-        this.blackoutStopTime = blackoutStopTime;
-        this.btnColor = "blue";
-        this.class = "cycle-irrigation-device-btn";
+        this.startTimes = startTimesArray || [];
+        this.btnColor = "#0394fc";
+        this.class = "irrigation-device-btn";
             
         this.renderBtn();
     }
@@ -38,12 +34,12 @@ export class CycleIrrigationDevice extends Device{
         let formElement = document.createElement("form");
 
         let form = `
-            <form class="deviceForm"> 
+            <form class="deviceForm" action="/irrigation" method="POST"> 
                 <label for="name">Name: </label>           
                 <input type="text" id="name" name="name" value="${this.name}">
 
                 <label for="pin">Pin: </label>           
-                <input type="number" id="pin" name="pin" value="${this.pin}">
+                <input type="number" id="pin" name="pin" value="${this.id}">
 
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
@@ -57,25 +53,21 @@ export class CycleIrrigationDevice extends Device{
                     <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
                 </div>
 
-                <div class="hr-min-sec-time">
-                    <label for="cycleOffTimeHr">Cycle Off Time Hr:Min:Sec </label>
-                    <input type="number" class"cycleOffTimeHr" name="cycleOffTimeHr" step="1" value="${this.cycleOffTimeHr}">
-                    <span class="colon">:</span>   
-                    <input type="number" class"cycleOffTimeMin" name="cycleOffTimeMin" step="1" value="${this.cycleOffTimeMin}">
-                    <span class="colon">:</span>   
-                    <input type="number" class"cycleOffTimeSec" name="cycleOffTimeSec" step="1" value="${this.cycleOffTimeSec}">
+                <div>
+                    <label for="onTime">On Time(s)</label>
+                    ${
+                        this.startTimes.forEach(element => {
+                            return `
+                                <input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span>
+                            `
+                        })
+                    }
+                    <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
+                    <button type="button" id="addAnothertime">Add Another Time</button>
                 </div>
 
-
-                <label for="blackoutStartTime">Blackout Start Time</label>
-                <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="${this.blackoutStartTime}">
-
-                <label for="blackoutStopTime">Blackout Stop Time</label>
-                <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
-
-                <button type="button" class="form-submit">Submit</button>
+                <button type="submit" class="form-submit">Add</button>
                 <button type="button" class="form-cancel">Cancel</button>
-                <button type="button" class="form-delete">Delete</button>
             </form>
         `;
         formElement.innerHTML = form;

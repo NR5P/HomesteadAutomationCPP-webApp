@@ -1,0 +1,29 @@
+<form class="deviceForm" action="/irrigation" method="POST"> 
+    <label for="name">Name: </label>           
+    <input type="text" id="name" name="name" value="">
+
+    <label for="pin">Pin: </label>           
+    <input type="number" id="pin" name="pin" value="">
+
+    <label for="notes">Notes: </label>           
+    <input type="textarea" id="notes" name="notes" value="">
+
+    <div class="hr-min-sec-time">
+        <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+        <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="">
+        <span class="colon">:</span>   
+        <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="">
+    </div>
+
+    <div>
+        <!--TODO: need to do javascript here to add all times like I did in irrigation-device.js-->
+        <label for="onTime">On Time(s)</label>
+        <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
+        <button type="button" id="addAnothertime">Add Another Time</button>
+    </div>
+
+    <button type="submit" class="form-submit">Add</button>
+    <button type="button" class="form-cancel">Cancel</button>
+</form>
