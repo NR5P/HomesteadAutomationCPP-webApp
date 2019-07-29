@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const methodOverride = require("method-override");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -28,6 +29,10 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 /****************************************************************************/
+/***********************method override middlewware***************************/
+app.use(methodOverride('_method'));
+/****************************************************************************/
+
 
 app.use(express.static(path.join(__dirname, "web"))); // public folders
 
@@ -55,6 +60,26 @@ app.post("/settings", (req, res) => {
         .then(res.redirect("/")
     )
 });
+
+app.get("/cycleIrrigation", (req, res) => {
+    res.render("cycleIrrigation");
+})
+
+app.post("/cycleIrrigation", (req, res) => {
+    const newCycleIrrigation = {
+        pin: req.body.pin,
+        name: req.body.name,
+        notes: req.body.notes,
+        cycleOnTime: req.body.cycleOnTime,
+        cycleOffTime: req.body.cycleOffTime,
+        blackoutStartTime: req.body.blackoutStartTime,
+        blackoutStopTime: req.body.blackoutStopTime         
+    }
+    new cycleIrrigationSchema(newCycleIrrigation)
+        .save()
+        .then(res.redirect("/")
+    )
+})
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
     

@@ -16,7 +16,7 @@ html {
     margin: 0 auto;
 }
 
-header > button {
+.header-btn {
     background-color: green;
     border: none;
     padding: 15px 32px;
@@ -25,11 +25,21 @@ header > button {
     text-decoration: none;
     font-size: 16px;
     color: white;
-    flex: 1;
 }
 
 header {
     display: flex;
+}
+header  button {
+    flex: 1;
+    width: 100%;
+}
+header > div {
+    flex: 1;
+    margin: 0 10px;
+}
+#drop-btn {
+    width: 100%;
 }
 
 #main-area > button {
@@ -103,3 +113,28 @@ form {
     font-size: 22px;
     background-color: red;
 }
+
+/*dropdown button for the add device button*/
+#dropdown-content{
+    position: absolute;
+    z-index: 1;
+    background-color: green;
+    right: 220px;
+}
+
+#dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 20px;
+}
+
+.show {
+    display: block;
+}
+
+.noshow {
+    display: none;
+}
+/*******************************************/

@@ -1,0 +1,25 @@
+<form class="deviceForm" action="/cycleIrrigation" method="POST"> 
+    <label for="name">Name: </label>           
+    <input type="text" id="name" name="name" value="">
+
+    <label for="pin">Pin: </label>           
+    <input type="number" id="pin" name="pin" value="">
+
+    <label for="notes">Notes: </label>           
+    <input type="textarea" id="notes" name="notes" value="">
+
+    <label for="cycleOnTime">Cycle On Time: </label>
+    <input type="time" id"cycleOnTime" name="cycleOnTime" step="1" value="">
+
+    <label for="cycleOffTime">Cycle Off Time: </label>
+    <input type="time" id"cycleOffTime" name="cycleOffTime" step="1" value="">
+
+    <label for="blackoutStartTime">Blackout Start Time</label>
+    <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="">
+
+    <label for="blackoutStopTime">Blackout Stop Time</label>
+    <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="">
+
+    <button type="submit" class="form-submit">Add</button>
+    <button type="button" class="form-cancel">Cancel</button>
+</form>

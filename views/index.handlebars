@@ -1,7 +1,21 @@
 <div id="container">
-    <header id="header">
-        <button id="header-btn">Settings</button>
-        <button id="header-btn">Add Device</button>
+    <header>
+        <div>
+            <button class="header-btn" onclick="window.location.href='/settings'">Settings</button>
+        </div>
+        <div>
+            <button class="header-btn" id="statistics-btn">Statistics</button>
+        </div>
+        <div>
+            <button class="header-btn" id="drop-btn">Add Device</button>
+            <div id="dropdown-content" class="noshow">
+                <a href="/cycleIrrigation">Cycle Irrigation</a>
+                <a href="#">Irrigation</a>
+                <a href="#">Heater</a>
+                <a href="#">Humidifier</a>
+                <a href="#">Soil Moisture Sensor</a>
+            </div>
+        </div>
     </header>
     <div id="main-area">
         <button id="make-appear">makeappear</button> 
