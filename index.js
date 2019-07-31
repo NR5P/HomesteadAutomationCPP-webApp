@@ -34,7 +34,7 @@ app.use(methodOverride('_method'));
 /****************************************************************************/
 
 
-app.use(express.static(path.join(__dirname, "web"))); // public folders
+app.use(express.static(path.join(__dirname, "public"))); // public folders
 
 app.get("/", (req, res) => {
     res.render("index");

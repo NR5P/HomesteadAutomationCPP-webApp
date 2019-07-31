@@ -1,4 +1,4 @@
-import {Device} from "./device.js"
+import {Device} from "./device.js.js"
 
 /**********************************************************************
  * for timed irrigation control
@@ -79,5 +79,19 @@ export class IrrigationDevice extends Device{
         }
         console.log(event.target.nextSibling.tagName);
         console.log(event.target.parentNode);
+    }
+
+    //TODO: currently working on this method
+    /********************************************************************************
+     * to make another irrigation time in the irrigation.handlebars file. It dynamically
+     * creates another spot to put another time. this method is ran from an onclick
+     * event on the button. 
+     * ******************************************************************************/
+    static renderAnotherStartTime() {
+        const onTimeDiv = document.getElementById("onTimeDiv");
+        const elementToAdd = '<input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>';
+        let divToAddTo = document.createElement("div");
+        divToAddTo.innerHTML(elementToAdd);
+        onTimeDiv.appendChild(divToAddTo);
     }
 };
