@@ -18,7 +18,7 @@
     </div>
 
     <div id="onTimeDiv">
-        <!--TODO: need to do javascript here to add all times like I did in irrigation-device.js-->
+        <!--TODO: find out why IrrigationDevice is undefined when button is clicked-->
         <label for="onTime">On Time(s)</label>
         <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
         <button type="button" id="addAnothertime" onclick="IrrigationDevice.renderAnotherStartTime()">Add Another Time</button>
@@ -27,5 +27,3 @@
     <button type="submit" class="form-submit">Add</button>
     <button type="button" class="form-cancel">Cancel</button>
 </form>
-<script src="/js/device.js" type="module"></script>
-<script src="/js/irrigation-device.js" type="module"></script>

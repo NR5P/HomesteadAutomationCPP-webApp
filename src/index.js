@@ -66,6 +66,10 @@ app.get("/cycleIrrigation", (req, res) => {
     res.render("cycleIrrigation");
 })
 
+app.get("/irrigation", (req, res) => {
+    res.render("irrigation");
+})
+
 app.post("/cycleIrrigation", (req, res) => {
     const newCycleIrrigation = {
         pin: req.body.pin,
