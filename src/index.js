@@ -20,6 +20,7 @@ const cycleIrrigationSchema = mongoose.model("cycleIrrigationSchema");
 const settingsSchema = mongoose.model("settingsSchema");
 
 /***************handlebars middleware***************************************/
+app.set('views', path.join(__dirname, 'views/'));
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
