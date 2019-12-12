@@ -39,6 +39,15 @@ app.use(express.static(path.join(__dirname, "public"))); // public folders
 
 app.get("/", (req, res) => {
     res.render("index");
+});
+
+app.get("/api/devices",(req,res) => {
+    cycleIrrigationSchema.find({
+
+    })
+    .then(cycleTimers => {
+        res.json(cycleTimers);
+    })
 })
 
 app.get("/settings", (req, res) => {
@@ -47,7 +56,7 @@ app.get("/settings", (req, res) => {
             setting: setting
         });
     });
-})
+});
 
 app.post("/settings", (req, res) => {
     const newSetting = {
