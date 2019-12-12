@@ -16,11 +16,6 @@ window.onload = () => {
         })
 }
 
-//TODO: temporary button to test 
-document.getElementById("make-appear").addEventListener("click",() => {
-    let button1 = new CycleIrrigationDevice(2, "a name");
-});
-
 addDeviceBtn.addEventListener("click", () => {
     if (dropdownContent.classList.contains("show")) {
         dropdownContent.classList.remove("show");
