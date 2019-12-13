@@ -6,6 +6,10 @@ const cycleIrrigationSchema = new Schema({
         type: String,
         required: true
     },
+    type: {
+        type: Number,
+        default: 1
+    },
     pin: {
         type: Number,
         required: true
