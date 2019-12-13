@@ -1,4 +1,4 @@
-import {Device} from "./device.js.js"
+import {Device} from "./device.js"
 
 /**********************************************************************
  * for timed irrigation control
