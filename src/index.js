@@ -16,8 +16,10 @@ mongoose.connect("mongodb://localhost/homestead", {
 //load database models
 require("./models/cycleIrrigationSchema");
 require("./models/settingsSchema");
+require("./models/irrigationSchema");
 const cycleIrrigationSchema = mongoose.model("cycleIrrigationSchema");
 const settingsSchema = mongoose.model("settingsSchema");
+const irrigationSchema = mongoose.model("irrigatinoSchema");
 
 /***************handlebars middleware***************************************/
 app.set('views', path.join(__dirname, 'views/'));
@@ -91,6 +93,22 @@ app.post("/cycleIrrigation", (req, res) => {
         blackoutStopTime: req.body.blackoutStopTime         
     }
     new cycleIrrigationSchema(newCycleIrrigation)
+        .save()
+        .then(res.redirect("/")
+    )
+})
+
+app.post("/irrigation", (req, res) => {
+    const irrigation = {
+        pin: req.body.pin,
+        name: req.body.name,
+        notes: req.body.notes,
+        cycleOnTime: req.body.cycleOnTime,
+        cycleOffTime: req.body.cycleOffTime,
+        blackoutStartTime: req.body.blackoutStartTime,
+        blackoutStopTime: req.body.blackoutStopTime         
+    }
+    new irrigationSchema(irrigation)
         .save()
         .then(res.redirect("/")
     )

@@ -25,10 +25,6 @@ window.onload = () => {
                         ))
                         break;
                 }
-
-
-                arrDevices.push(new CycleIrrigationDevice(
-                    item._id,item.name,item.pin));
             })
         })
 }
