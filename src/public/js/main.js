@@ -9,22 +9,18 @@ window.onload = () => {
     fetch("/api/devices", {method: "GET"})
         .then(res => res.json())
         .then(data => {
-            //foreach through them
-            data.forEach(function(item) {
-                switch(item.type) {
-                    case 1: 
-                        arrDevices.push(new CycleIrrigationDevice(
-                            item._id,item.name,item.pin,item.notes, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec, item.cycleOffTimeHr,
-                            item.cycleOffTimeMin, item.cycleOffTimeSec, item.blackoutStartTime, item.blackoutStopTime
-                        ))
-                        break;
-                    case 2:
-                        arrDevices.push(new IrrigationDevice(
-                            item._id,item.name,item.pin,item.notes, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec,
-                            item.startTimesArray
-                        ))
-                        break;
-                }
+            data.cycle.forEach(function(item) {
+                arrDevices.push(new CycleIrrigationDevice(
+                    item._id,item.name,item.pin,item.notes, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec, item.cycleOffTimeHr,
+                    item.cycleOffTimeMin, item.cycleOffTimeSec, item.blackoutStartTime, item.blackoutStopTime
+                ));
+            })
+            data.irrigate.forEach(function(item) {
+                arrDevices.push(new IrrigationDevice(
+                    item._id,item.name,item.pin,item.notes, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec,
+                    item.startTimesArray
+                ))
+
             })
         })
 }

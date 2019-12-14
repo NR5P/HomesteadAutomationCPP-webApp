@@ -47,8 +47,16 @@ app.get("/api/devices",(req,res) => {
     cycleIrrigationSchema.find({
 
     })
-    .then(cycleTimers => {
-        res.json(cycleTimers);
+    .then(cycle => {
+        irrigationSchema.find({
+
+        })
+        .then(irrigate => {
+            res.json({
+                cycle,
+                irrigate
+            })
+        })
     })
 })
 

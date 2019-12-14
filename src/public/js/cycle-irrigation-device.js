@@ -17,7 +17,7 @@ export class CycleIrrigationDevice extends Device{
         this.cycleOffTimeSec = cycleOffTimeSec;
         this.blackoutStartTime = blackoutStartTime;
         this.blackoutStopTime = blackoutStopTime;
-        this.btnColor = "blue";
+        this.btnColor = "#5757f2";
         this.class = "cycle-irrigation-device-btn";
             
         this.renderBtn();

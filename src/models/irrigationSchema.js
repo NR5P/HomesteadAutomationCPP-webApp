@@ -8,7 +8,7 @@ const cycleIrrigationSchema = new Schema({
     },
     type: {
         type: Number,
-        default: 1
+        default: 2
     },
     pin: {
         type: Number,

@@ -20,7 +20,7 @@ html {
 
 /***********buttons at top of main window**********************************/
 .header-btn {
-    background-color: green;
+    background-color: #26c741;
     border: none;
     padding: 15px 32px;
     margin: 0 10px;
@@ -28,6 +28,8 @@ html {
     text-decoration: none;
     font-size: 16px;
     color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 header {
@@ -131,7 +133,7 @@ form {
     text-align: center;
     display: block;
     font-size: 22px;
-    background-color: green;
+    background-color: #26c741;
 }
 .form-cancel {
     width: 80%;
@@ -161,7 +163,7 @@ form {
 #dropdown-content{
     position: absolute;
     z-index: 1;
-    background-color: green;
+    background-color: #26c741;
     right: 220px;
 }
 
