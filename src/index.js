@@ -19,7 +19,7 @@ require("./models/settingsSchema");
 require("./models/irrigationSchema");
 const cycleIrrigationSchema = mongoose.model("cycleIrrigationSchema");
 const settingsSchema = mongoose.model("settingsSchema");
-const irrigationSchema = mongoose.model("irrigatinoSchema");
+const irrigationSchema = mongoose.model("irrigationSchema");
 
 /***************handlebars middleware***************************************/
 app.set('views', path.join(__dirname, 'views/'));

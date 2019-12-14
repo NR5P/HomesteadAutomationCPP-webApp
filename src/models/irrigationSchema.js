@@ -37,4 +37,4 @@ const cycleIrrigationSchema = new Schema({
 
 });
 
-mongoose.model("cycleIrrigationSchema", cycleIrrigationSchema);
+mongoose.model("irrigationSchema", cycleIrrigationSchema);
