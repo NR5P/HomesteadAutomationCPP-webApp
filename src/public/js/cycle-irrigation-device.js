@@ -4,10 +4,10 @@ import {Device} from "./device.js"
  * for timed irrigation control
  *********************************************************************/
 export class CycleIrrigationDevice extends Device{
-    constructor(id, name, pin, notes, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec, cycleOffTimeHr,
+    constructor(id, name, pin, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec, cycleOffTimeHr,
         cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) {
 
-        super(id, name, pin, notes);
+        super(id, name, pin, notes, state);
 
         this.cycleOnTimeHr = cycleOnTimeHr;
         this.cycleOnTimeMin = cycleOnTimeMin;

@@ -37,14 +37,11 @@ header {
 }
 header  button {
     flex: 1;
-    width: 100%;
+    width: 300px;
 }
 header > div {
     flex: 1;
-    margin: 0 10px;
-}
-#drop-btn {
-    width: 100%;
+    display: flex;
 }
 
 #main-area > button {
@@ -164,7 +161,9 @@ form {
     position: absolute;
     z-index: 1;
     background-color: #26c741;
-    right: 220px;
+    right: 190px;
+    top: 50px;
+    width: 250px;
 }
 
 #dropdown-content a {
@@ -183,3 +182,9 @@ form {
     display: none;
 }
 /*******************************************/
+
+.on-indicator {
+    height: 30px;
+    float: left;
+    padding: 5px;
+}

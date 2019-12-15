@@ -18,6 +18,10 @@ const cycleIrrigationSchema = new Schema({
         type: String,
         required: false
     },
+    state: {
+        type: String,
+        default: "off"
+    },
     whenCreated: {
         type: Date,
         default: Date.now
