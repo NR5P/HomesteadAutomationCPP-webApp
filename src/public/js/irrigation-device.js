@@ -24,13 +24,6 @@ export class IrrigationDevice extends Device{
      * the device
      *********************************************************************/
     renderDeviceSettings(event) {
-        //console.log(event.target);
-        //event.target.innerHTML = "something";
-        //console.log(this.name); // does not know the name here
-        //this.name = "something";
-        //console.log(this.name); // does not know the name here
-        //event.target.innerHTML = "something";
-        //console.log(Device.deviceList);
         let formElement = document.createElement("form");
 
         let form = `
@@ -75,15 +68,20 @@ export class IrrigationDevice extends Device{
                 <button type="button" class="form-delete">Delete</button>
             </form>
         `;
+
+
         formElement.innerHTML = form;
+
         
         if (event.target.nextSibling == null || event.target.nextSibling.tagName != "FORM") {
             event.target.insertAdjacentElement("afterend", formElement);
         } else {
             event.target.parentNode.removeChild(event.target.nextSibling);
         }
-        console.log(event.target.nextSibling.tagName);
-        console.log(event.target.parentNode);
+
+        document.getElementById("addAnothertime").addEventListener("click", () => {
+            IrrigationDevice.renderAnotherStartTime();
+        })
     }
 
     //TODO: currently working on this method
@@ -93,10 +91,7 @@ export class IrrigationDevice extends Device{
      * event on the button. 
      * ******************************************************************************/
     static renderAnotherStartTime() {
-        const onTimeDiv = document.getElementById("onTimeDiv");
+        const onTimeDiv = document.getElementsByClassName("on-times");
         const elementToAdd = '<input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>';
-        let divToAddTo = document.createElement("div");
-        divToAddTo.innerHTML(elementToAdd);
-        onTimeDiv.appendChild(divToAddTo);
     }
 };

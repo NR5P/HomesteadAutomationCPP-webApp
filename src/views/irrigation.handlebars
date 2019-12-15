@@ -17,13 +17,12 @@
         <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="">
     </div>
 
-    <div id="onTimeDiv">
-        <!--TODO: find out why IrrigationDevice is undefined when button is clicked-->
+    <div class="on-times">
         <label for="onTime">On Time(s)</label>
         <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
         <button type="button" id="addAnothertime" onclick="IrrigationDevice.renderAnotherStartTime()">Add Another Time</button>
     </div>
 
     <button type="submit" class="form-submit">Add</button>
-    <button type="button" class="form-cancel">Cancel</button>
+    <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
 </form>
