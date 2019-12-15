@@ -71,6 +71,16 @@ header > div {
     margin: 0 auto;
 }
 
+.on-times {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#addAnothertime {
+    display: block;
+}
+
 .time-format-div input[type="radio"] {
     margin-right: 10px;
 }
@@ -187,4 +197,13 @@ form {
     height: 30px;
     float: left;
     padding: 5px;
+}
+
+.delete-btn {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ed2d33;
+    margin-left: 5px;
 }

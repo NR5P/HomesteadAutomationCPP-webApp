@@ -74,7 +74,7 @@ export class CycleIrrigationDevice extends Device{
                 <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
 
                 <button type="button" class="form-submit">Submit</button>
-                <button type="button" class="form-cancel">Cancel</button>
+                <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
                 <button type="button" class="form-delete">Delete</button>
             </form>
         `;

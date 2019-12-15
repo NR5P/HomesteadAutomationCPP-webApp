@@ -53,13 +53,17 @@ export class IrrigationDevice extends Device{
                     <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
                 </div>
 
-                <div>
+                <div class="on-times">
                     <label for="onTime">On Time(s)</label>
                     ${
                         this.startTimes.forEach(element => {
-                            return `
-                                <input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span>
-                            `
+                            if (element !== null)
+                            {
+                                console.log(element);
+                                return `
+                                    <input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span>
+                                `
+                            }
                         })
                     }
                     <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
@@ -67,7 +71,8 @@ export class IrrigationDevice extends Device{
                 </div>
 
                 <button type="submit" class="form-submit">Add</button>
-                <button type="button" class="form-cancel">Cancel</button>
+                <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
+                <button type="button" class="form-delete">Delete</button>
             </form>
         `;
         formElement.innerHTML = form;

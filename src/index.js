@@ -113,10 +113,10 @@ app.post("/irrigation", (req, res) => {
         name: req.body.name,
         notes: req.body.notes,
         state: req.body.state,
-        cycleOnTime: req.body.cycleOnTime,
-        cycleOffTime: req.body.cycleOffTime,
-        blackoutStartTime: req.body.blackoutStartTime,
-        blackoutStopTime: req.body.blackoutStopTime         
+        cycleOnTimeHr: req.body.cycleOnTimeHr,
+        cycleOnTimeMin: req.body.cycleOnTimeMin,
+        cycleOnTimeSec: req.body.cycleOnTimeSec,
+        startTimes: req.body.startTimes
     }
     new irrigationSchema(irrigation)
         .save()
