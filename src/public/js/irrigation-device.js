@@ -49,17 +49,13 @@ export class IrrigationDevice extends Device{
                 <div class="on-times">
                     <label for="onTime">On Time(s)</label>
                     ${
-                        this.startTimes.forEach(element => {
-                            if (element !== null)
-                            {
-                                console.log(element);
-                                return `
-                                    <input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span>
-                                `
-                            }
+                        this.startTimes.map(element => {
+                                return `<div><input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span></div>`
                         })
                     }
-                    <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
+                    <div>
+                    <input type="time" name="onTime"><span><button type="button" class="delete-btn">Delete</button></span>
+                    </div>
                     <button type="button" id="addAnothertime">Add Another Time</button>
                 </div>
 
@@ -79,8 +75,15 @@ export class IrrigationDevice extends Device{
             event.target.parentNode.removeChild(event.target.nextSibling);
         }
 
-        document.getElementById("addAnothertime").addEventListener("click", () => {
-            IrrigationDevice.renderAnotherStartTime();
+        document.getElementById("addAnothertime").addEventListener("click", (e) => {
+            IrrigationDevice.renderAnotherStartTime(e);
+        })
+
+        document.querySelector(".on-times").addEventListener("click", (e) => {
+            if (e.target.className === "delete-btn") {
+                console.log(e.target.parentNode.parentNode.parentNode)
+                e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+            }
         })
     }
 
@@ -90,8 +93,11 @@ export class IrrigationDevice extends Device{
      * creates another spot to put another time. this method is ran from an onclick
      * event on the button. 
      * ******************************************************************************/
-    static renderAnotherStartTime() {
-        const onTimeDiv = document.getElementsByClassName("on-times");
+    static renderAnotherStartTime(e) {
+        const addAnotherBtn = document.getElementById("addAnothertime");
         const elementToAdd = '<input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>';
+        const divToAdd = document.createElement("div");
+        divToAdd.innerHTML = elementToAdd;
+        e.currentTarget.parentNode.insertBefore(divToAdd,addAnotherBtn);
     }
 };

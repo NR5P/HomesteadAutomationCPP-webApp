@@ -107,7 +107,7 @@ form > label {
     margin: auto;
 }
 
-form > div > input {
+form > div input {
     padding: 12px 20px;
     margin: 8px auto;
     margin-bottom: 20px;
