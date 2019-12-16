@@ -11,14 +11,14 @@ window.onload = () => {
         .then(data => {
             data.cycle.forEach(function(item) {
                 arrDevices.push(new CycleIrrigationDevice(
-                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec, item.cycleOffTimeHr,
+                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeHour, item.cycleOnTimeMin, item.cycleOnTimeSec, item.cycleOffTimeHour,
                     item.cycleOffTimeMin, item.cycleOffTimeSec, item.blackoutStartTime, item.blackoutStopTime
                 ));
             })
             data.irrigate.forEach(function(item) {
                 arrDevices.push(new IrrigationDevice(
-                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeHr, item.cycleOnTimeMin, item.cycleOnTimeSec,
-                    item.startTimesArray
+                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeHour, item.cycleOnTimeMin, item.cycleOnTimeSec,
+                    item.startTimes
                 ))
 
             })

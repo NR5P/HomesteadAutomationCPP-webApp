@@ -19,10 +19,30 @@
 
     <div class="on-times">
         <label for="onTime">On Time(s)</label>
-        <input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>
+        <div>
+            <input type="time" name="onTime"><span><button type="button" class="delete-btn">Delete</button></span>
+        </div>
         <button type="button" id="addAnothertime" onclick="IrrigationDevice.renderAnotherStartTime()">Add Another Time</button>
     </div>
 
     <button type="submit" class="form-submit">Add</button>
     <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
 </form>
+
+<script>
+    document.getElementById("addAnothertime").addEventListener("click", (e) => {
+        const addAnotherBtn = document.getElementById("addAnothertime");
+        const elementToAdd = '<input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>';
+        const divToAdd = document.createElement("div");
+        divToAdd.innerHTML = elementToAdd;
+        e.currentTarget.parentNode.insertBefore(divToAdd,addAnotherBtn);
+    })
+
+    document.querySelector(".on-times").addEventListener("click", (e) => {
+        if (e.target.className === "delete-btn") {
+            console.log(e.target.parentNode.parentNode.parentNode)
+            e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+        }
+    })
+
+</script>

@@ -51,11 +51,11 @@ const cycleIrrigationSchema = new Schema({
         required: false
     },
     blackoutStartTime: {
-        type: Date,
+        type: String,
         required: false
     },
     blackoutStopTime: {
-        type: Date,
+        type: String,
         required: false
     }
 });

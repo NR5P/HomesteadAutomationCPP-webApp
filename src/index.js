@@ -96,8 +96,12 @@ app.post("/cycleIrrigation", (req, res) => {
         name: req.body.name,
         notes: req.body.notes,
         state: req.body.state,
-        cycleOnTime: req.body.cycleOnTime,
-        cycleOffTime: req.body.cycleOffTime,
+        cycleOnTimeHour: req.body.cycleOnTimeHr,
+        cycleOnTimeMin: req.body.cycleOnTimeMin,
+        cycleOnTimeSec: req.body.cycleOnTimeSec,
+        cycleOffTimeHour: req.body.cycleOffTimeHr,
+        cycleOffTimeMin: req.body.cycleOffTimeMin,
+        cycleOffTimeSec: req.body.cycleOffTimeSec,
         blackoutStartTime: req.body.blackoutStartTime,
         blackoutStopTime: req.body.blackoutStopTime         
     }
@@ -113,10 +117,10 @@ app.post("/irrigation", (req, res) => {
         name: req.body.name,
         notes: req.body.notes,
         state: req.body.state,
-        cycleOnTimeHr: req.body.cycleOnTimeHr,
+        cycleOnTimeHour: req.body.cycleOnTimeHr,
         cycleOnTimeMin: req.body.cycleOnTimeMin,
         cycleOnTimeSec: req.body.cycleOnTimeSec,
-        startTimes: req.body.startTimes
+        startTimes: req.body.onTime
     }
     new irrigationSchema(irrigation)
         .save()

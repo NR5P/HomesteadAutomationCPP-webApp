@@ -38,6 +38,9 @@ const cycleIrrigationSchema = new Schema({
         type: Number,
         required: false
     },
+    startTimes: {
+        type: [String]
+    }
 
 });
 

@@ -32,7 +32,7 @@ export class IrrigationDevice extends Device{
                 <input type="text" id="name" name="name" value="${this.name}">
 
                 <label for="pin">Pin: </label>           
-                <input type="number" id="pin" name="pin" value="${this.id}">
+                <input type="number" id="pin" name="pin" value="${this.pin}">
 
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
@@ -50,6 +50,7 @@ export class IrrigationDevice extends Device{
                     <label for="onTime">On Time(s)</label>
                     ${
                         this.startTimes.map(element => {
+                            console.log(element);
                                 return `<div><input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span></div>`
                         })
                     }
