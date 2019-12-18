@@ -11,7 +11,7 @@ class GPIO {
         void static irrigationOff() {
             std::cout << "irrigation off" << std::endl;
         }
-        void static cycleIrrigationOff() {
+        void static cycleIrrigationOn() {
             std::cout << "cycle irrigation on" << std::endl;
         }
         void static cycleIrrigationOff() {
