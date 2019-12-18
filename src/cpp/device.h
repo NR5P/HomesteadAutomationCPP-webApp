@@ -3,6 +3,7 @@
 
 #include<string>
 #include<vector>
+#include "gpio.h"
 
 class Device {
     private:

@@ -5,6 +5,7 @@
 #include <ctime>
 #include <vector>
 #include <string>
+#include "gpio.h"
 
 class Irrigation : Device {
     private:

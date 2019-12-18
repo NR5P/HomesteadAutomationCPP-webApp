@@ -4,6 +4,7 @@
 #include "device.h"
 #include <string>
 #include <ctime>
+#include "gpio.h"
 
 class CycleIrrigation: Device {
     private:
