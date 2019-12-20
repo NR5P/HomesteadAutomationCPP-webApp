@@ -3,6 +3,7 @@
 
 #include<string>
 #include<vector>
+#include<ctime>
 #include "gpio.h"
 
 class Device {
@@ -11,13 +12,20 @@ class Device {
         std::string notes;
         int pin;
         bool state;
+    
+    protected:
+        time_t now;
 
-        static std::vector<Device> deviceList;
 
     public:
+        static std::vector<Device> deviceList;
         Device(std::string id, int pin, std::string notes)
             : id(id), pin(pin), notes(notes)
         {};
+
+        void turnOn();
+        void turnOff();
+        bool getState();
 };
 
 #endif
