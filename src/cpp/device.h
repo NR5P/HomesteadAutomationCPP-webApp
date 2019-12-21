@@ -15,7 +15,7 @@ class Device {
     
     protected:
         time_t now;
-
+        bool onOff;
 
     public:
         static std::vector<Device> deviceList;

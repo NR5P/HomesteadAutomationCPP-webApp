@@ -9,6 +9,7 @@
 class Irrigation : Device {
     private:
         time_t cycleOnTime;
+        time_t offTime;
         std::vector<time_t> startTimes;
 
     public:
@@ -17,6 +18,8 @@ class Irrigation : Device {
         {
             Device::deviceList.push_back(*this);
         };
+
+        void run();
 };
 
 #endif
