@@ -1,17 +1,36 @@
 #include "cycleirrigation.h"
 
 void CycleIrrigation::run() {
-/*
-    tmBlackoutStartTime = localtime(&now);
-    tmBlackoutStartTime->tm_hour = localtime(&blackoutStartTime)->tm_hour;
-    tmBlackoutStartTime->tm_min = localtime(&blackoutStartTime)->tm_min;
-    tmBlackoutStartTime->tm_sec = localtime(&blackoutStartTime)->tm_sec;
-
-    tmBlackoutStopTime = localtime(&now);
-*/
+    if (!isBlackedOut()) {
+        if (getState() == false) {
+            if (time(NULL) >= nextTimeOn) {
+                turnOn();
+                nextTimeOff = time(NULL) + cycleOnTime;
+                GPIO::cycleIrrigationOn();
+                return;
+            } 
+        } else {
+            if (time(NULL) >= nextTimeOff) {
+                turnOff();
+                nextTimeOn = time(NULL) + cycleOffTime;
+                GPIO::cycleIrrigationOff();
+                return;
+            }
+        }
+    }
+    turnOff();
+    GPIO::cycleIrrigationOff();
+}
 
 bool CycleIrrigation::isBlackedOut() {
-
+    if (blackoutStartTime > blackoutStopTime) {
+        if (time(NULL) > blackoutStartTime || time(NULL) < blackoutStopTime)
+            return true;
+    } else {
+        if (time(NULL) > blackoutStartTime && time(NULL) < blackoutStopTime)
+            return true;
+    }
+    return false;
 }
 
 void CycleIrrigation::setBlackoutStartTime(int hr, int min, int sec) {
@@ -32,6 +51,23 @@ void CycleIrrigation::setBlackoutStopTime(int hr, int min, int sec) {
         blackoutStopTime = mktime(tmBlackoutStopTime);
 }
 
+void CycleIrrigation::setCycleOnTime(int hr, int min, int sec) {
+    struct tm *tmCycleOnTime = localtime(&unixTimeStamp);
+    tmCycleOnTime->tm_sec = sec;
+    tmCycleOnTime->tm_min = min;
+    tmCycleOnTime->tm_hour = hr;
+    if (mktime(tmCycleOnTime) != -1)
+        cycleOnTime = mktime(tmCycleOnTime);
+}
+
+void CycleIrrigation::setCycleOffTime(int hr, int min, int sec) {
+    struct tm *tmCycleOffTime = localtime(&unixTimeStamp);
+    tmCycleOffTime->tm_sec = sec;
+    tmCycleOffTime->tm_min = min;
+    tmCycleOffTime->tm_hour = hr;
+    if (mktime(tmCycleOffTime) != -1)
+        cycleOffTime = mktime(tmCycleOffTime);
+}
 
 
 

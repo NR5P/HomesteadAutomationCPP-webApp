@@ -9,14 +9,15 @@
 class CycleIrrigation: Device {
     private:
         static const time_t unixTimeStamp = 0;
-
+        
         time_t cycleOnTime;
         time_t cycleOffTime;
 
+        time_t nextTimeOn;
+        time_t nextTimeOff;
+
         time_t blackoutStartTime;
         time_t blackoutStopTime;
-
-        bool blackedOut;
 
     public:
         CycleIrrigation(std::string id, int pin, std::string notes, time_t cycleOnTime, time_t cycleOffTime,
@@ -24,8 +25,8 @@ class CycleIrrigation: Device {
             : Device(id, pin, notes), cycleOnTime(cycleOnTime), cycleOffTime(cycleOffTime),
                     blackoutStartTime(blackoutStartTime), blackoutStopTime(blackoutStopTime)
         {
+            nextTimeOn = time(NULL) + cycleOffTime;
             Device::deviceList.push_back(*this);
-            blackoutDuration = blackoutStopTime - blackoutStartTime;
         };
 
         void run();
@@ -34,6 +35,8 @@ class CycleIrrigation: Device {
         //setters
         void setBlackoutStartTime(int hr, int min, int sec);
         void setBlackoutStopTime(int hr, int min, int sec);
+        void setCycleOnTime(int hr, int min, int sec);
+        void setCycleOffTime(int hr, int min, int sec);
 };
 
 
