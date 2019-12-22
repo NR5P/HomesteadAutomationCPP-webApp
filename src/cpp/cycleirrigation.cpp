@@ -34,7 +34,7 @@ bool CycleIrrigation::isBlackedOut() {
 }
 
 void CycleIrrigation::setBlackoutStartTime(int hr, int min, int sec) {
-    struct tm *tmBlackoutStartTime = localtime(&unixTimeStamp);
+    struct tm *tmBlackoutStartTime = localtime(0);
     tmBlackoutStartTime->tm_sec = sec;
     tmBlackoutStartTime->tm_min = min;
     tmBlackoutStartTime->tm_hour = hr;
@@ -43,7 +43,7 @@ void CycleIrrigation::setBlackoutStartTime(int hr, int min, int sec) {
 }
 
 void CycleIrrigation::setBlackoutStopTime(int hr, int min, int sec) {
-    struct tm *tmBlackoutStopTime = localtime(&unixTimeStamp);
+    struct tm *tmBlackoutStopTime = localtime(0);
     tmBlackoutStopTime->tm_sec = sec;
     tmBlackoutStopTime->tm_min = min;
     tmBlackoutStopTime->tm_hour = hr;
@@ -52,7 +52,7 @@ void CycleIrrigation::setBlackoutStopTime(int hr, int min, int sec) {
 }
 
 void CycleIrrigation::setCycleOnTime(int hr, int min, int sec) {
-    struct tm *tmCycleOnTime = localtime(&unixTimeStamp);
+    struct tm *tmCycleOnTime = localtime(0);
     tmCycleOnTime->tm_sec = sec;
     tmCycleOnTime->tm_min = min;
     tmCycleOnTime->tm_hour = hr;
@@ -61,7 +61,7 @@ void CycleIrrigation::setCycleOnTime(int hr, int min, int sec) {
 }
 
 void CycleIrrigation::setCycleOffTime(int hr, int min, int sec) {
-    struct tm *tmCycleOffTime = localtime(&unixTimeStamp);
+    struct tm *tmCycleOffTime = localtime(0);
     tmCycleOffTime->tm_sec = sec;
     tmCycleOffTime->tm_min = min;
     tmCycleOffTime->tm_hour = hr;

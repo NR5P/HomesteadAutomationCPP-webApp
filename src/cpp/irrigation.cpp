@@ -1,7 +1,7 @@
 #include "irrigation.h"
 
 void Irrigation::run() {
-    for (std::vector<time_t, time_t>::iterator it = startTimes.begin(); it != startTimes.end(); ++it) {
+    for (std::map<time_t, time_t>::iterator it = irrigationTimes.begin(); it != irrigationTimes.end(); ++it) {
         if (time(NULL) > it->first && time(NULL) < it->first + it->second) {
             turnOn();
             GPIO::irrigationOn();
@@ -13,8 +13,8 @@ void Irrigation::run() {
 }
 
 void Irrigation::setIrrigationTime(int *arrIrrigationStart, int *arrIrrigationDuration) {
-    struct tm *tmIrrigationStart = localtime(&unixTimeStamp);
-    struct tm *tmIrrigationDuration = localtime(&unixTimeStamp);
+    struct tm *tmIrrigationStart = localtime(0);
+    struct tm *tmIrrigationDuration = localtime(0);
 
     tmIrrigationStart->tm_sec = arrIrrigationStart[0];
     tmIrrigationStart->tm_min = arrIrrigationStart[1];
@@ -27,6 +27,6 @@ void Irrigation::setIrrigationTime(int *arrIrrigationStart, int *arrIrrigationDu
     if (mktime(tmIrrigationStart) != -1 && mktime(tmIrrigationDuration) != -1) {
         irrigationTimes[mktime(tmIrrigationStart)] = mktime(tmIrrigationDuration);
     }
-
+}
 
 

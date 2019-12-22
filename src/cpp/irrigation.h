@@ -9,6 +9,7 @@
 
 class Irrigation : Device {
     private:
+        static const time_t unixTimeStamp = 0;
         std::map<time_t,time_t> irrigationTimes;
 
     public:
