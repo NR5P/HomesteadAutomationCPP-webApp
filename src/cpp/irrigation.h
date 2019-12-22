@@ -4,13 +4,13 @@
 #include "device.h"
 #include <ctime>
 #include <string>
+#include <map>
 #include "gpio.h"
 
 class Irrigation : Device {
     private:
         time_t cycleOnTime;
-        time_t offTime;
-        std::vector<time_t> startTimes;
+        std::map<time_t,time_t> irrigationTimes;
 
     public:
         Irrigation(std::string id, int pin, std::string notes, time_t cycleOnTime, std::vector<time_t> startTimes)
@@ -20,6 +20,7 @@ class Irrigation : Device {
         };
 
         void run();
+        void setIrrigationTimes(int cycle)
 };
 
 #endif
