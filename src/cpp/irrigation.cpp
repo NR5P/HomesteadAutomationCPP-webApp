@@ -6,3 +6,22 @@ void Irrigation::run() {
         if (now == )
     }
 }
+
+void Irrigation::setIrrigationTime(int *arrIrrigationStart, int *arrIrrigationDuration) {
+    struct tm *tmIrrigationStart = localtime(&unixTimeStamp);
+    struct tm *tmIrrigationDuration = localtime(&unixTimeStamp);
+
+    tmIrrigationStart->tm_sec = arrIrrigationStart[0];
+    tmIrrigationStart->tm_min = arrIrrigationStart[1];
+    tmIrrigationStart->tm_hour = arrIrrigationStart[2];
+
+    tmIrrigationDuration->tm_sec = arrIrrigationDuration[0];
+    tmIrrigationDuration->tm_min = arrIrrigationDuration[1];
+    tmIrrigationDuration->tm_hour = arrIrrigationDuration[2];
+
+    if (mktime(tmIrrigationStart) != -1 && mktime(tmIrrigationDuration) != -1) {
+        irrigationTimes[mktime(tmIrrigationStart)] = mktime(tmIrrigationDuration);
+    }
+
+
+
