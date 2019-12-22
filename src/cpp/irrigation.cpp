@@ -1,9 +1,14 @@
 #include "irrigation.h"
 
 void Irrigation::run() {
-    now = time(0);
-    for (std::vector<time_t>::iterator it = startTimes.begin(); it != startTimes.end(); ++it) {
-        if (now == )
+    for (std::vector<time_t, time_t>::iterator it = startTimes.begin(); it != startTimes.end(); ++it) {
+        if (time(NULL) > it->first && time(NULL) < it->first + it->second) {
+            turnOn();
+            GPIO::irrigationOn();
+        } else {
+            turnOff();
+            GPIO::irrigationOff();
+        }
     }
 }
 
