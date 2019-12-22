@@ -20,12 +20,17 @@ class CycleIrrigation: Device {
         time_t blackoutStopTime;
 
     public:
-        CycleIrrigation(std::string id, int pin, std::string notes, time_t cycleOnTime, time_t cycleOffTime,
-                        time_t blackoutStartTime, time_t blackoutStopTime)
-            : Device(id, pin, notes), cycleOnTime(cycleOnTime), cycleOffTime(cycleOffTime),
-                    blackoutStartTime(blackoutStartTime), blackoutStopTime(blackoutStopTime)
+        CycleIrrigation(std::string id, int pin, std::string notes, int *arrCycleOnTime, int *arrCycleOffTime,
+                        int *arrBlackoutStartTime, int *arrBlackoutStopTime)
+            : Device(id, pin, notes)
         {
             nextTimeOn = time(NULL) + cycleOffTime;
+            setCycleOnTime(arrCycleOnTime[0], arrCycleOnTime[1], arrCycleOnTime[2]);
+            setCycleOffTime(arrCycleOffTime[0], arrCycleOffTime[1], arrCycleOffTime[2]);
+
+            setBlackoutStartTime(arrBlackoutStartTime[0], arrBlackoutStartTime[1], arrBlackoutStartTime[2]);
+            setBlackoutStopTime(arrBlackoutStopTime[0], arrBlackoutStopTime[1], arrBlackoutStopTime[2]);
+
             Device::deviceList.push_back(*this);
         };
 

@@ -13,7 +13,7 @@ class Irrigation : Device {
         std::map<time_t,time_t> irrigationTimes;
 
     public:
-        Irrigation(std::string id, int pin, std::string notes, time_t cycleOnTime, std::vector<time_t> startTimes)
+        Irrigation(std::string id, int pin, std::string notes, time_t cycleOnTime, std::vector<time_t, time_t> startTimes)
             : Device(id, pin, notes), cycleOnTime(cycleOnTime), startTimes(startTimes) 
         {
             Device::deviceList.push_back(*this);

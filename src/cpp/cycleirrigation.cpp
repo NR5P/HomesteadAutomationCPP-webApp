@@ -33,42 +33,38 @@ bool CycleIrrigation::isBlackedOut() {
     return false;
 }
 
-void CycleIrrigation::setBlackoutStartTime(time_t newBstartTime) {
+void CycleIrrigation::setBlackoutStartTime(int hr, int min, int sec) {
     struct tm *tmBlackoutStartTime = localtime(&unixTimeStamp);
-    struct tm *tmNewBstartTime = localtime(&newBstartTime)
-    tmBlackoutStartTime->tm_sec = tmNewBstartTime->tm_sec;
-    tmBlackoutStartTime->tm_min = tmNewBstartTime->tm_min;
-    tmBlackoutStartTime->tm_hour = tmNewBstartTime->tm_hour;
+    tmBlackoutStartTime->tm_sec = sec;
+    tmBlackoutStartTime->tm_min = min;
+    tmBlackoutStartTime->tm_hour = hr;
     if (mktime(tmBlackoutStartTime) != -1)
         blackoutStartTime = mktime(tmBlackoutStartTime);
 }
 
-void CycleIrrigation::setBlackoutStopTime(time_t newBstopTime) {
+void CycleIrrigation::setBlackoutStopTime(int hr, int min, int sec) {
     struct tm *tmBlackoutStopTime = localtime(&unixTimeStamp);
-    struct tm *tmNewBstopTime = localtime(&newBstopTime)
-    tmBlackoutStopTime->tm_sec = tmNewBstopTime->tm_sec;
-    tmBlackoutStopTime->tm_min = tmNewBstopTime->tm_min;
-    tmBlackoutStopTime->tm_hour = tmNewBstopTime->tm_hour;
+    tmBlackoutStopTime->tm_sec = sec;
+    tmBlackoutStopTime->tm_min = min;
+    tmBlackoutStopTime->tm_hour = hr;
     if (mktime(tmBlackoutStopTime) != -1)
         blackoutStopTime = mktime(tmBlackoutStopTime);
 }
 
-void CycleIrrigation::setCycleOnTime(time_t newCycleOnTime) {
+void CycleIrrigation::setCycleOnTime(int hr, int min, int sec) {
     struct tm *tmCycleOnTime = localtime(&unixTimeStamp);
-    struct tm *tmNewCycleOnTime = localtime(&newCycleOnTime)
-    tmCycleOnTime->tm_sec = tmNewCycleOnTime->tm_sec;
-    tmCycleOnTime->tm_min = tmNewCycleOnTime->tm_min;
-    tmCycleOnTime->tm_hour = tmNewCycleOnTime->tm_hour;
+    tmCycleOnTime->tm_sec = sec;
+    tmCycleOnTime->tm_min = min;
+    tmCycleOnTime->tm_hour = hr;
     if (mktime(tmCycleOnTime) != -1)
         cycleOnTime = mktime(tmCycleOnTime);
 }
 
-void CycleIrrigation::setCycleOffTime(time_t newCycleOffTime) {
+void CycleIrrigation::setCycleOffTime(int hr, int min, int sec) {
     struct tm *tmCycleOffTime = localtime(&unixTimeStamp);
-    struct tm *tmNewCycleOffTime = localtime(&newCycleOffTime)
-    tmCycleOffTime->tm_sec = tmNewCycleOffTime->tm_sec;
-    tmCycleOffTime->tm_min = tmNewCycleOffTime->tm_min;
-    tmCycleOffTime->tm_hour = tmNewCycleOffTime->tm_hour;
+    tmCycleOffTime->tm_sec = sec;
+    tmCycleOffTime->tm_min = min;
+    tmCycleOffTime->tm_hour = hr;
     if (mktime(tmCycleOffTime) != -1)
         cycleOffTime = mktime(tmCycleOffTime);
 }
