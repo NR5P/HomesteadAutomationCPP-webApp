@@ -19,7 +19,6 @@ class Irrigation : Device {
             for (std::map<int*, int*>::iterator it = mapIrrigationTimes.begin(); it != mapIrrigationTimes.end(); ++it) {
                 setIrrigationTime(it->first, it->second);
             }
-            Device::deviceList.push_back(*this);
         }
 
         void run();

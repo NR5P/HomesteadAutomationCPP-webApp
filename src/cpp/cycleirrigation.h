@@ -30,8 +30,6 @@ class CycleIrrigation: Device {
 
             setBlackoutStartTime(arrBlackoutStartTime[0], arrBlackoutStartTime[1], arrBlackoutStartTime[2]);
             setBlackoutStopTime(arrBlackoutStopTime[0], arrBlackoutStopTime[1], arrBlackoutStopTime[2]);
-
-            Device::deviceList.push_back(*this);
         };
 
         void run();
