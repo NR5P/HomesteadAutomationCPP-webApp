@@ -27,7 +27,7 @@ class Device {
         virtual void run() = 0;
 
         //getters
-        bool getState();
+        bool getState() const;
         static bool areTimersOn();
         std::string getName() const {
             return name;
@@ -39,7 +39,7 @@ class Device {
             return notes;
         };
 
-        int getPin() {
+        int getPin() const {
             return pin;
         };
 

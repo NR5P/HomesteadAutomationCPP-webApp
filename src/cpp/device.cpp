@@ -10,7 +10,7 @@ void Device::turnOff() {
     this->state = 0;
 }
 
-bool Device::getState() {
+bool Device::getState() const {
     return state;
 }
 

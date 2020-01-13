@@ -7,7 +7,7 @@
 #include <map>
 #include "gpio.h"
 
-class Irrigation : Device {
+class Irrigation : public Device {
     private:
         static const time_t unixTimeStamp = 0;
         std::map<time_t,time_t> irrigationTimes;
@@ -23,6 +23,11 @@ class Irrigation : Device {
 
         void run();
         void setIrrigationTime(int*, int*);
+
+        //getters
+        std::map<time_t, time_t> getIrrigationTimes() const {
+            return irrigationTimes;
+        }
 };
 
 #endif

@@ -26,14 +26,12 @@ int main(int arc, char *argv[]) {
 
     std::thread thread_object(runDevices);
 
-/* TODO: testing
+/*
     int test[3] = {1,2,3};
     std::string testId = "3";
     std::string testString = "test";
     int testPin = 3;
     CycleIrrigation x = CycleIrrigation(testString,testPin,testString,test,test,test,test);
-
-    std::cout << "something" << std::endl;
     std::cout << x << std::endl;
 */
 

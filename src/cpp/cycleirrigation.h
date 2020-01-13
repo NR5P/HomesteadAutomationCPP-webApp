@@ -6,7 +6,7 @@
 #include <ctime>
 #include "gpio.h"
 
-class CycleIrrigation: Device {
+class CycleIrrigation: public Device {
     private:
         static const time_t unixTimeStamp = 0;
         
