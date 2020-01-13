@@ -4,11 +4,13 @@
 #include<string>
 #include<vector>
 #include<ctime>
+#include<iostream>
 #include "gpio.h"
 
 class Device {
     private:
         std::string id;
+        std::string name;
         std::string notes;
         int pin;
         bool state;
@@ -19,6 +21,7 @@ class Device {
             : id(id), pin(pin), notes(notes)
         {};
 
+
         void turnOn();
         void turnOff();
         virtual void run() = 0;
@@ -26,6 +29,20 @@ class Device {
         //getters
         bool getState();
         static bool areTimersOn();
+        std::string getName() const {
+            return name;
+        };
+        std::string getId() const {
+            return id;
+        };
+        std::string getNotes() const {
+            return notes;
+        };
+
+        int getPin() {
+            return pin;
+        };
+
 };
 
 #endif

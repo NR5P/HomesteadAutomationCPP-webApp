@@ -31,6 +31,8 @@ class CycleIrrigation: Device {
             setBlackoutStartTime(arrBlackoutStartTime[0], arrBlackoutStartTime[1], arrBlackoutStartTime[2]);
             setBlackoutStopTime(arrBlackoutStopTime[0], arrBlackoutStopTime[1], arrBlackoutStopTime[2]);
         };
+        friend std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
+        friend std::istream &operator>>(std::istream &out, const CycleIrrigation cycleIrrigation);
 
         void run();
         bool isBlackedOut();
@@ -40,6 +42,32 @@ class CycleIrrigation: Device {
         void setBlackoutStopTime(int hr, int min, int sec);
         void setCycleOnTime(int hr, int min, int sec);
         void setCycleOffTime(int hr, int min, int sec);
+
+        //getters
+        long int getCycleOntime() const {
+            return static_cast<long int>(cycleOnTime);
+        };
+
+        long int getCycleOfftime() const {
+            return static_cast<long int>(cycleOffTime);
+        };
+
+        long int getNextTimeOn() const {
+            return static_cast<long int>(nextTimeOn);
+        };
+
+        long int getNextTimeOff() const {
+            return static_cast<long int>(nextTimeOff);
+        };
+
+        long int getBlackoutStartTime() const {
+            return static_cast<long int>(blackoutStartTime);
+        };
+
+        long int getBlackoutStopTime() const {
+            return static_cast<long int>(blackoutStopTime);
+        };
+
 };
 
 
