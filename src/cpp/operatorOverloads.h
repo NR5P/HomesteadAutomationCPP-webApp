@@ -28,9 +28,11 @@ std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigati
 }
 
 
+/*
 std::istream &operator>>(std::istream &in, CycleIrrigation cycleIrrigation) {
 
 }
+*/
 
 
 std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation) {
@@ -63,9 +65,11 @@ std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation) {
 }
 
 
+/*
 std::istream &operator>>(std::istream &in, Irrigation irrigation) {
 
 }
+*/
 
 
 

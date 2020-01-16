@@ -12,18 +12,16 @@
 
 
 
-static std::vector<Device *> deviceList;
 
 void runDevices() {
     while(Device::areTimersOn() == true) {
-        for (auto device : deviceList) {
+        for (auto device : Device::deviceList) {
             device->run();
         }
     }
 }
 
 int main(int arc, char *argv[]) {
-
     std::thread thread_object(runDevices);
 
 /*

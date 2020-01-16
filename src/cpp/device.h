@@ -15,12 +15,16 @@ class Device {
         int pin;
         bool state;
         static bool timersOn;
+
     
     public:
+        static std::vector<Device *> deviceList;
+
         Device(std::string id, int pin, std::string notes)
             : id(id), pin(pin), notes(notes)
         {};
 
+        static void deSerialize(char returnMessage[256],int length = 256);
 
         void turnOn();
         void turnOff();

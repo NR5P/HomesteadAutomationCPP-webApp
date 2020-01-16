@@ -17,3 +17,10 @@ bool Device::getState() const {
 bool Device::areTimersOn() {
     return timersOn;
 }
+
+/*
+deserialize json from client side
+*/
+void Device::deSerialize(char returnMessage[256],int length = 256) {
+    
+}
