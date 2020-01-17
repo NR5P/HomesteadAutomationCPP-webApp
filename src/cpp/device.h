@@ -26,10 +26,7 @@ class Device {
             : id(id), pin(pin), notes(notes)
         {};
 
-        friend std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
-        friend std::istream &operator>>(std::istream &out, const CycleIrrigation cycleIrrigation);
-
-        static void deSerialize(char returnMessage[256],int length = 256);
+        static void deSerialize(char returnMessage[256]);
 
         void turnOn();
         void turnOff();

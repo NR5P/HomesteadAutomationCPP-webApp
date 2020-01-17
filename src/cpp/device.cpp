@@ -21,6 +21,6 @@ bool Device::areTimersOn() {
 /*
 deserialize json from client side
 */
-void Device::deSerialize(char returnMessage[256],int length = 256) {
+void Device::deSerialize(char returnMessage[256]) {
     
 }

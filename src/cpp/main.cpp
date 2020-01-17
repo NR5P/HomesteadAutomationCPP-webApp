@@ -2,7 +2,6 @@
 #include "irrigation.h"
 #include "device.h"
 #include "mySocket.h"
-#include "operatorOverloads.h"
 
 #include <thread>
 #include <string>
@@ -10,8 +9,8 @@
 
 #define PORT 9005
 
-
-
+std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
+std::istream &operator>>(std::istream &out, const CycleIrrigation cycleIrrigation);
 
 void runDevices() {
     while(Device::areTimersOn() == true) {
