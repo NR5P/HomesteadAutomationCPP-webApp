@@ -8,12 +8,14 @@
 #include "gpio.h"
 
 class Device {
-    private:
+    protected:
         std::string id;
         std::string name;
         std::string notes;
         int pin;
         bool state;
+
+    private:
         static bool timersOn;
 
     
@@ -23,6 +25,9 @@ class Device {
         Device(std::string id, int pin, std::string notes)
             : id(id), pin(pin), notes(notes)
         {};
+
+        friend std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
+        friend std::istream &operator>>(std::istream &out, const CycleIrrigation cycleIrrigation);
 
         static void deSerialize(char returnMessage[256],int length = 256);
 
@@ -46,6 +51,12 @@ class Device {
         int getPin() const {
             return pin;
         };
+
+
+        //setters
+        void setId(std::string id) {
+            this->id = id;
+        }
 
 };
 

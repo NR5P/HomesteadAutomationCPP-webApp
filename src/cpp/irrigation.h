@@ -21,6 +21,8 @@ class Irrigation : public Device {
             }
         }
 
+        friend std::istream &operator>>(std::istream &in, Irrigation irrigation);
+
         void run();
         void setIrrigationTime(int*, int*);
 
@@ -29,5 +31,38 @@ class Irrigation : public Device {
             return irrigationTimes;
         }
 };
+
+std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation) {
+    out << "cycleIrrigation" << " ";
+
+    out << irrigation.getId() << " "; 
+    out << irrigation.getName() << " "; 
+    out << irrigation.getNotes() << " "; 
+    out << irrigation.getPin() << " "; 
+    out << irrigation.getState() << " "; 
+    out << irrigation.areTimersOn() << " "; 
+
+    out << "irrigationTimes" << " "; 
+
+    std::map<time_t, time_t> irrigationTimes = irrigation.getIrrigationTimes();
+    for (std::map<time_t, time_t>::iterator it = irrigationTimes.begin(); it != irrigationTimes.end(); it++) {
+        out << static_cast<long int>(it->first) << " ";
+        out << static_cast<long int>(it->second) << " ";
+    }
+
+    out << "end" << " ";
+
+    return out;
+}
+
+
+std::istream &operator>>(std::istream &in, Irrigation irrigation) {
+    in >> irrigation.id;
+    in >> irrigation.name;
+    in >> irrigation.notes;
+    in >> irrigation.pin;
+    // TODO: this needs to keep checking for irrigation times somewhere.
+}
+
 
 #endif
