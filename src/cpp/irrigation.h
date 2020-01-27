@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include "gpio.h"
+#include <iostream>
 
 class Irrigation : public Device {
     private:
@@ -21,7 +22,8 @@ class Irrigation : public Device {
             }
         }
 
-        friend std::istream &operator>>(std::istream &in, Irrigation irrigation);
+        friend std::istream &operator>>(std::istream &in, Irrigation &irrigation);
+        friend std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation);
 
         void run();
         void setIrrigationTime(int*, int*);
@@ -32,31 +34,33 @@ class Irrigation : public Device {
         }
 };
 
-std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation) {
-    out << "cycleIrrigation" << " ";
+inline std::ostream &operator<<(std::ostream &out, const Irrigation &irrigation) {
+    out << "{";
+    out << "\"cycleIrrigation\":{";
 
-    out << irrigation.getId() << " "; 
-    out << irrigation.getName() << " "; 
-    out << irrigation.getNotes() << " "; 
-    out << irrigation.getPin() << " "; 
-    out << irrigation.getState() << " "; 
-    out << irrigation.areTimersOn() << " "; 
+    out << "\"id\":\"" << irrigation.id << "\""; 
+    out << "\"name\":\"" << irrigation.name << "\""; 
+    out << "\"notes\":\"" << irrigation.notes << "\""; 
+    out << "\"pin\":\"" << irrigation.pin << "\""; 
+    out << "\"state\":\"" << irrigation.state << "\""; 
+    out << "\"areTimersOn\":\"" << irrigation.areTimersOn << "\""; 
 
-    out << "irrigationTimes" << " "; 
+    out << "\"irrigationTimes\":[" << "\""; 
 
     std::map<time_t, time_t> irrigationTimes = irrigation.getIrrigationTimes();
     for (std::map<time_t, time_t>::iterator it = irrigationTimes.begin(); it != irrigationTimes.end(); it++) {
         out << static_cast<long int>(it->first) << " ";
         out << static_cast<long int>(it->second) << " ";
     }
+    out << "]";
 
-    out << "end" << " ";
+    out << "}}";
 
     return out;
 }
 
 
-std::istream &operator>>(std::istream &in, Irrigation irrigation) {
+inline std::istream &operator>>(std::istream &in, Irrigation &irrigation) {
     in >> irrigation.id;
     in >> irrigation.name;
     in >> irrigation.notes;

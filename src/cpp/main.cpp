@@ -9,15 +9,14 @@
 
 #define PORT 9005
 
-std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
-std::istream &operator>>(std::istream &out, const CycleIrrigation cycleIrrigation);
-
 void runDevices() {
+    /*
     while(Device::areTimersOn() == true) {
         for (auto device : Device::deviceList) {
             device->run();
         }
     }
+    */
 }
 
 int main(int arc, char *argv[]) {

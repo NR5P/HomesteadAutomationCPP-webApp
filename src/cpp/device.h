@@ -24,7 +24,9 @@ class Device {
 
         Device(std::string id, int pin, std::string notes)
             : id(id), pin(pin), notes(notes)
-        {};
+        {
+
+        }
 
         static void deSerialize(char returnMessage[256]);
 

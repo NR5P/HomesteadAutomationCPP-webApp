@@ -4,6 +4,7 @@
 #include "device.h"
 #include <string>
 #include <ctime>
+#include <iostream>
 #include "gpio.h"
 
 class CycleIrrigation: public Device {
@@ -32,7 +33,7 @@ class CycleIrrigation: public Device {
             setBlackoutStopTime(arrBlackoutStopTime[0], arrBlackoutStopTime[1], arrBlackoutStopTime[2]);
         };
         friend std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation);
-        friend std::istream &operator>>(std::istream &in, CycleIrrigation cycleIrrigation);
+        friend std::istream &operator>>(std::istream &in, CycleIrrigation &cycleIrrigation);
 
         void run();
         bool isBlackedOut();
@@ -68,5 +69,40 @@ class CycleIrrigation: public Device {
             return static_cast<long int>(blackoutStopTime);
         };
 };
+
+
+inline std::istream &operator>>(std::istream &in, CycleIrrigation &cycleIrrigation) {
+    in >> cycleIrrigation.id;
+    in >> cycleIrrigation.name;
+    in >> cycleIrrigation.notes;
+    in >> cycleIrrigation.pin;
+
+    in >> cycleIrrigation.cycleOnTime;
+    in >> cycleIrrigation.cycleOffTime;
+    in >> cycleIrrigation.blackoutStartTime;
+    in >> cycleIrrigation.blackoutStopTime;
+
+}
+
+inline std::ostream &operator<<(std::ostream &out, const CycleIrrigation &cycleIrrigation) {
+    out << "cycleIrrigation" << " ";
+
+    out << cycleIrrigation.getId() << " "; 
+    out << cycleIrrigation.getName() << " "; 
+    out << cycleIrrigation.getNotes() << " "; 
+    out << cycleIrrigation.getPin() << " "; 
+    out << cycleIrrigation.getState() << " "; 
+    out << cycleIrrigation.areTimersOn() << " "; 
+
+    out << cycleIrrigation.getCycleOntime() << " "; 
+    out << cycleIrrigation.getCycleOfftime() << " "; 
+    out << cycleIrrigation.getNextTimeOn() << " "; 
+    out << cycleIrrigation.getNextTimeOff() << " "; 
+    out << cycleIrrigation.getBlackoutStartTime() << " "; 
+    out << cycleIrrigation.getBlackoutStopTime() << " "; 
+
+    return out;
+}
+
 
 #endif
