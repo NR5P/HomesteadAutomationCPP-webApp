@@ -4,6 +4,11 @@ void CycleIrrigation::run() {
 
 }
 
+void CycleIrrigation::editCycleIrrigation(CycleIrrigation *deviceToCompare) {
+
+    delete deviceToCompare;
+}
+
 bool CycleIrrigation::isBlackedOut() {
 
 }

@@ -33,6 +33,7 @@ class Device {
         void turnOn();
         void turnOff();
         virtual void run() = 0;
+        virtual void editCycleIrrigation(CycleIrrigation *) = 0;
 
         //getters
         bool getState() const;

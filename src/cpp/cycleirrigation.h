@@ -37,6 +37,7 @@ class CycleIrrigation: public Device {
 
         void run();
         bool isBlackedOut();
+        void editCycleIrrigation(CycleIrrigation *deviceToCompare);
         
         //setters
         void setBlackoutStartTime(int hr, int min, int sec);

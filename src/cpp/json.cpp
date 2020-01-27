@@ -31,7 +31,6 @@ void JSON::buildObjects() {
 }
 
 void JSON::buildCycleIrrigation() {
-    bool foundMatch;
     std::string id;
     int pin;
     std::string notes;
@@ -41,20 +40,21 @@ void JSON::buildCycleIrrigation() {
     int arrBlackoutStopTime[3];
 
     jsonData >> id >> pin >> notes 
-            >> arrCycleOnTime[0] >> arrCycleOnTime[1] >> arrCycleOnTime[2]
-            >> arrCycleOffTime[0] >> arrCycleOffTime[1] >> arrCycleOffTime[3]
-            >> arrBlackoutStartTime[0] >> arrBlackoutStartTime[1] >> arrBlackoutStartTime[2]
-            >> arrBlackoutStopTime[0] >> arrBlackoutStopTime[1] >> arrBlackoutStopTime[2];
+             >> arrCycleOnTime[0] >> arrCycleOnTime[1] >> arrCycleOnTime[2]
+             >> arrCycleOffTime[0] >> arrCycleOffTime[1] >> arrCycleOffTime[3]
+             >> arrBlackoutStartTime[0] >> arrBlackoutStartTime[1] >> arrBlackoutStartTime[2]
+             >> arrBlackoutStopTime[0] >> arrBlackoutStopTime[1] >> arrBlackoutStopTime[2];
 
     std::vector<Device *>::iterator it;
     for (it = Device::deviceList.begin(); it != Device::deviceList.end(); it++) {
-        if ((*it)->getId() == id)
-            foundMatch = true;
-    }
-    if (!foundMatch) {
-        Device::deviceList.push_back(new CycleIrrigation(id, pin, notes, arrCycleOnTime, arrCycleOffTime,
+        if ((*it)->getId() == id) {
+            (*it)->editCycleIrrigation(new CycleIrrigation(id, pin, notes, arrCycleOnTime, arrCycleOffTime,
                                                         arrBlackoutStartTime, arrBlackoutStopTime));
+            return; 
+        }
     }
+    Device::deviceList.push_back(new CycleIrrigation(id, pin, notes, arrCycleOnTime, arrCycleOffTime,
+                                                    arrBlackoutStartTime, arrBlackoutStopTime));
 }
 
 void JSON::buildIrrigation() {
