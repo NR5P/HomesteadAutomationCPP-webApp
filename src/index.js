@@ -3,23 +3,23 @@ const exphbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const path = require("path");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const mysql = require("mysql");
 
 const app = express();
 
 //connect to database
-mongoose.connect("mongodb://localhost/homestead", {
-    useNewUrlParser: true
-}).then(() => console.log("mongoDB connected..."))
-  .catch((err) => console.log(err));
-
-//load database models
-require("./models/cycleIrrigationSchema");
-require("./models/settingsSchema");
-require("./models/irrigationSchema");
-const cycleIrrigationSchema = mongoose.model("cycleIrrigationSchema");
-const settingsSchema = mongoose.model("settingsSchema");
-const irrigationSchema = mongoose.model("irrigationSchema");
+const db = mysql.createConnection({
+    host : "localhost",
+    user : "root",
+    password : "Orangev8z",
+    database : "homestead"
+});
+db.connect((err) => {
+    if(err) {
+        throw err;
+    }
+    console.log("mysql connected...")
+});
 
 /***************handlebars middleware***************************************/
 app.set('views', path.join(__dirname, 'views/'));
@@ -61,14 +61,17 @@ app.get("/api/devices",(req,res) => {
 })
 
 app.get("/settings", (req, res) => {
+    /*
     settingsSchema.find({}).then((setting) => {
         res.render("settings", {
             setting: setting
         });
     });
+    */
 });
 
 app.post("/settings", (req, res) => {
+    /*
     const newSetting = {
         userName: req.body.userName,
         password: req.body.password,
@@ -80,6 +83,7 @@ app.post("/settings", (req, res) => {
         .save()
         .then(res.redirect("/")
     )
+    */
 });
 
 app.get("/cycleIrrigation", (req, res) => {
@@ -91,6 +95,7 @@ app.get("/irrigation", (req, res) => {
 })
 
 app.post("/cycleIrrigation", (req, res) => {
+    /*
     const newCycleIrrigation = {
         pin: req.body.pin,
         name: req.body.name,
@@ -109,9 +114,11 @@ app.post("/cycleIrrigation", (req, res) => {
         .save()
         .then(res.redirect("/")
     )
+    */
 })
 
 app.post("/irrigation", (req, res) => {
+    /*
     const irrigation = {
         pin: req.body.pin,
         name: req.body.name,
@@ -126,6 +133,7 @@ app.post("/irrigation", (req, res) => {
         .save()
         .then(res.redirect("/")
     )
+    */
 })
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
