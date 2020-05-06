@@ -4,14 +4,11 @@ import {Device} from "./device.js"
  * for timed irrigation control
  *********************************************************************/
 export class IrrigationDevice extends Device{
-    constructor(id, name, pin, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
-        startTimesArray) {
+    constructor(id, name, pin, notes, state, cycleOnTimeArray, startTimesArray) {
 
         super(id, name, pin, notes, state);
 
-        this.cycleOnTimeHr = cycleOnTimeHr;
-        this.cycleOnTimeMin = cycleOnTimeMin;
-        this.cycleOnTimeSec = cycleOnTimeSec;
+        this.cycleOnTimeSec = cycleOnTimeArray || [];
         this.startTimes = startTimesArray || [];
         this.btnColor = "#0394fc";
         this.class = "irrigation-device-btn";

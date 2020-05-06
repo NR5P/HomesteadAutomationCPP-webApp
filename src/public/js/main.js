@@ -17,10 +17,8 @@ window.onload = () => {
             })
             data.irrigate.forEach(function(item) {
                 arrDevices.push(new IrrigationDevice(
-                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeHour, item.cycleOnTimeMin, item.cycleOnTimeSec,
-                    item.startTimes
-                ))
-
+                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeArray, item.startTimesArray)
+                )
             })
         })
 }

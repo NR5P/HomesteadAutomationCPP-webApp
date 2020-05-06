@@ -122,7 +122,7 @@ app.post("/irrigation", (req, res) => {
                 ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}
                 );
                 INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES(
-                LAST_INSERT_ID(), ${req.body.cycleOnTime} TODO: iso8601 time, ${req.body.onTime}
+                LAST_INSERT_ID(), ${req.body.cycleLength} TODO: iso8601 time, ${req.body.onTime}
                 );
                 COMMIT;`;
    db.query(sql, function(err, result) {
