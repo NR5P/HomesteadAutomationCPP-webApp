@@ -75,7 +75,7 @@ app.post("/settings", (req, res) => {
    const sql = `INSERT INTO settings (userName, password, phoneNumber, email, timeFormat24Hr) VALUES (
     ${req.body.userName}, ${req.body.password}, ${req.body.phoneNumber}, ${req.body.email}, ${req.body.time-format-24} 
    )`;
-   console.query(sql, function(err, result) {
+   db.query(sql, function(err, result) {
         if(err) throw err;
    });
 });
@@ -95,7 +95,7 @@ app.post("/cycleIrrigation", (req, res) => {
                  ${req.body.cycleOnTimeMin}, ${req.body.cycleOnTimeSec}, ${req.body.cycleOffTimeHr}, ${req.body.cycleOffTimeMin},
                  ${req.body.cycleOffTimeSec}, ${req.body.blackoutStartTime}, ${req.body.blackoutStopTime})
                  )`;
-   console.query(sql, function(err, result) {
+   db.query(sql, function(err, result) {
         if(err) throw err;
    });
 });
@@ -125,7 +125,7 @@ app.post("/irrigation", (req, res) => {
                 LAST_INSERT_ID(), ${req.body.cycleOnTime} TODO: iso8601 time, ${req.body.onTime}
                 );
                 COMMIT;`;
-   console.query(sql, function(err, result) {
+   db.query(sql, function(err, result) {
         if(err) throw err;
    });
 });
