@@ -89,7 +89,7 @@ app.get("/irrigation", (req, res) => {
 });
 
 app.post("/cycleIrrigation", (req, res) => {
-    const sql = `INSERT INTO cycleIrrigation (pin, name, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec
+    const sql = `INSERT INTO cycleIrrigation (pin, name, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
                  cycleOffTimeHr, cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) VALUES (
                  ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}, ${req.body.cycleOnTimeHr},
                  ${req.body.cycleOnTimeMin}, ${req.body.cycleOnTimeSec}, ${req.body.cycleOffTimeHr}, ${req.body.cycleOffTimeMin},
