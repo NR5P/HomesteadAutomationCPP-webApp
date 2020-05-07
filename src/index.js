@@ -101,22 +101,6 @@ app.post("/cycleIrrigation", (req, res) => {
 });
 
 app.post("/irrigation", (req, res) => {
-    /*
-    const irrigation = {
-        pin: req.body.pin,
-        name: req.body.name,
-        notes: req.body.notes,
-        state: req.body.state,
-        cycleOnTimeHour: req.body.cycleOnTimeHr,
-        cycleOnTimeMin: req.body.cycleOnTimeMin,
-        cycleOnTimeSec: req.body.cycleOnTimeSec,
-        startTimes: req.body.onTime
-    }
-    new irrigationSchema(irrigation)
-        .save()
-        .then(res.redirect("/")
-    )
-    */
    let cycleLengthArray = []
    req.body.cycleOnTimeHr.map((element, index) => {
         cycleLengthArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
