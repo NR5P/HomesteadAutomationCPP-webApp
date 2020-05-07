@@ -117,14 +117,21 @@ app.post("/irrigation", (req, res) => {
         .then(res.redirect("/")
     )
     */
-   const sql = `BEGIN 
+   let cycleLengthArray = []
+   req.body.cycleOnTimeHr.map((element, index) => {
+        cycleLengthArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+   })
+   let sql = `BEGIN 
                 INSERT INTO irrigation (pin, name, notes, state) VALUES (
                 ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}
                 );
-                INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES(
-                LAST_INSERT_ID(), ${req.body.cycleLength} TODO: iso8601 time, ${req.body.onTime}
-                );
-                COMMIT;`;
+                INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES`
+                cycleLengthArray.forEach((item, index) => {
+                    if (index !== 0) {sql += ", "}
+                    sql += `(LAST_INSERT_ID(), ${item}, ${req.body.onTime})`
+                })
+                sql += " COMMIT;";
+
    db.query(sql, function(err, result) {
         if(err) throw err;
    });

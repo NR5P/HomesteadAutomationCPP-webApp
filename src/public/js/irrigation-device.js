@@ -34,21 +34,24 @@ export class IrrigationDevice extends Device{
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
 
-                <div class="hr-min-sec-time">
-                    <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
-                    <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${this.cycleOnTimeHr}">
-                    <span class="colon">:</span>   
-                    <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${this.cycleOnTimeMin}">
-                    <span class="colon">:</span>   
-                    <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
-                </div>
+                ${
+                    this.cycleOnTimeArray.map(element => {
+                        return `<div class="hr-min-sec-time">
+                            <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+                            <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substr(11, 12)}">
+                            <span class="colon">:</span>   
+                            <input type="number" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${element.substr(14, 15)}">
+                            <span class="colon">:</span>   
+                            <input type="number" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${element.substr(17, 18)}">
+                        </div>`
+                        })
+                    }
 
                 <div class="on-times">
                     <label for="onTime">On Time(s)</label>
                     ${
-                        this.startTimes.map(element => {
-                            console.log(element);
-                                return `<div><input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span></div>`
+                        this.startTimesArray.map(element => {
+                            return `<div><input type="time" name="onTime" value="${element}"><span><button class="delete-btn">Delete</button></span></div>`
                         })
                     }
                     <div>
