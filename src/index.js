@@ -49,6 +49,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/devices",(req,res) => {
+    /*
     cycleIrrigationSchema.find({
 
     })
@@ -63,6 +64,7 @@ app.get("/api/devices",(req,res) => {
             })
         })
     })
+    */
 })
 
 app.get("/settings", (req, res) => {
