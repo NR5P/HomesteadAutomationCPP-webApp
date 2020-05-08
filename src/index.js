@@ -4,6 +4,7 @@ const methodOverride = require("method-override");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
+const {singleToDoubleDigit} = require("./customMiddleware/customMiddleware.js");
 
 const app = express();
 
@@ -35,6 +36,10 @@ app.use(bodyParser.json());
 /***********************method override middlewware***************************/
 app.use(methodOverride('_method'));
 /****************************************************************************/
+/**********************custom middleware*********************************** */
+app.use(singleToDoubleDigit);
+/****************************************************************************/
+
 
 
 app.use(express.static(path.join(__dirname, "public"))); // public folders
