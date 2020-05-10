@@ -146,7 +146,6 @@ app.post("/irrigation", (req, res) => {
                     startTime : startTimeArray[index]
                 }
             })
-            //TODO: make list of irrigationruntimedata entries for multiple entries
             db.query('INSERT INTO irrigationRunTimes SET ?', irrigationRunTimeData, function() {
                 if (error) {
                     return db.rollback(function() {
@@ -164,22 +163,6 @@ app.post("/irrigation", (req, res) => {
             })
         })
    })
-   /*
-   let sql = `BEGIN 
-                INSERT INTO irrigation (pin, name, notes, state) VALUES (
-                ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}
-                );
-                INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES`
-                cycleLengthArray.forEach((item, index) => {
-                    if (index !== 0) {sql += ", "}
-                    sql += `(LAST_INSERT_ID(), ${item}, ${req.body.onTime})`
-                })
-                sql += " COMMIT;";
-
-   db.query(sql, function(err, result) {
-        if(err) throw err;
-   });
-   */
 });
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
