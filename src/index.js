@@ -109,9 +109,14 @@ app.post("/cycleIrrigation", (req, res) => {
 });
 
 app.post("/irrigation", (req, res) => {
-   let runTimeArray = req.body.cycleOnTimeHr.map((element, index) => {
-        return `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
-   })
+    let runTimeArray = [];
+    let index = 0;
+    runTimeArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+    if (req.body.cycleOnTimeHr instanceof Array) {
+        runTimeArray = req.body.cycleOnTimeHr.map((element, index) => {
+                return `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+        })
+    } 
    const irrigationData = {
        pin : req.body.pin,
        name : req.body.name,
