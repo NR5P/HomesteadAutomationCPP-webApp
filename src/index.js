@@ -110,13 +110,21 @@ app.post("/cycleIrrigation", (req, res) => {
 
 app.post("/irrigation", (req, res) => {
     let runTimeArray = [];
+    let startTimeArray = [];
     let index = 0;
-    runTimeArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+    runTimeArray[index] = `0000-00-00T${req.body.cycleOnTimeHr}:${req.body.cycleOnTimeMin}:${req.body.cycleOnTimeSec}`;
     if (req.body.cycleOnTimeHr instanceof Array) {
         runTimeArray = req.body.cycleOnTimeHr.map((element, index) => {
                 return `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
         })
     } 
+    startTimeArray[index] = req.body.onTime;
+    if (req.body.onTime instanceof Array) {
+        startTimeArray = req.body.onTime.map((element, index) => {
+            return element;
+        })
+    } 
+
    const irrigationData = {
        pin : req.body.pin,
        name : req.body.name,
@@ -131,11 +139,11 @@ app.post("/irrigation", (req, res) => {
                 });
             }
             const irrigationEntryId = results.insertId;
-            let irrigationRunTimeData = req.body.onTime.map((element, index) => {
+            let irrigationRunTimeData = runTimeArray.map((element, index) => {
                 return {
                     irrigationId : irrigationEntryId,
                     runTime : runTimeArray[index],
-                    startTime : index
+                    startTime : startTimeArray[index]
                 }
             })
             //TODO: make list of irrigationruntimedata entries for multiple entries
@@ -156,6 +164,7 @@ app.post("/irrigation", (req, res) => {
             })
         })
    })
+   /*
    let sql = `BEGIN 
                 INSERT INTO irrigation (pin, name, notes, state) VALUES (
                 ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}
@@ -170,6 +179,7 @@ app.post("/irrigation", (req, res) => {
    db.query(sql, function(err, result) {
         if(err) throw err;
    });
+   */
 });
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
