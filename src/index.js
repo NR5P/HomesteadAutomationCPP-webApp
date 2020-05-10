@@ -13,7 +13,8 @@ const db = mysql.createConnection({
     host : "localhost",
     user : "root",
     password : "Orangev8z",
-    database : "homestead"
+    database : "homestead",
+    multipleStatements : true
 });
 db.connect((err) => {
     if(err) {
@@ -108,9 +109,45 @@ app.post("/cycleIrrigation", (req, res) => {
 });
 
 app.post("/irrigation", (req, res) => {
-   let cycleLengthArray = []
-   req.body.cycleOnTimeHr.map((element, index) => {
+   let cycleLengthArray = req.body.cycleOnTimeHr.map((element, index) => {
         cycleLengthArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+   })
+   const irrigationData = {
+       pin : req.body.pin,
+       name : req.body.name,
+       notes : req.body.notes,
+       state : req.body.state
+   }
+   db.beginTransaction(function(err) {
+        db.query('INSERT INTO irrigation SET ?', irrigationData, function(error, results, fields) {
+            if (error) {
+                return db.rollback(function() {
+                    throw error;
+                });
+            }
+            let irrigationEntryId = results.insertId;
+            const irrigationRunTimeData = {
+                irrigationId : irrigationEntryId,
+                runTime : '432:23',
+                startTime : req.body.onTime
+            }
+            //TODO: make list of irrigationruntimedata entries for multiple entries
+            db.query('INSERT INTO irrigationRunTimes SET ?', [irrigationRunTimeData], function() {
+                if (error) {
+                    return db.rollback(function() {
+                        throw error;
+                    });
+                }
+                db.commit(function(err) {
+                    if (err) {
+                        return db.rollback(function() {
+                            throw err;
+                        });
+                    }
+                    console.log("successful entry");
+                })
+            })
+        })
    })
    let sql = `BEGIN 
                 INSERT INTO irrigation (pin, name, notes, state) VALUES (
