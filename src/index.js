@@ -109,8 +109,8 @@ app.post("/cycleIrrigation", (req, res) => {
 });
 
 app.post("/irrigation", (req, res) => {
-   let cycleLengthArray = req.body.cycleOnTimeHr.map((element, index) => {
-        cycleLengthArray[index] = `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+   let runTimeArray = req.body.cycleOnTimeHr.map((element, index) => {
+        return `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
    })
    const irrigationData = {
        pin : req.body.pin,
@@ -125,14 +125,16 @@ app.post("/irrigation", (req, res) => {
                     throw error;
                 });
             }
-            let irrigationEntryId = results.insertId;
-            const irrigationRunTimeData = {
-                irrigationId : irrigationEntryId,
-                runTime : '432:23',
-                startTime : req.body.onTime
-            }
+            const irrigationEntryId = results.insertId;
+            let irrigationRunTimeData = req.body.onTime.map((element, index) => {
+                return {
+                    irrigationId : irrigationEntryId,
+                    runTime : runTimeArray[index],
+                    startTime : index
+                }
+            })
             //TODO: make list of irrigationruntimedata entries for multiple entries
-            db.query('INSERT INTO irrigationRunTimes SET ?', [irrigationRunTimeData], function() {
+            db.query('INSERT INTO irrigationRunTimes SET ?', irrigationRunTimeData, function() {
                 if (error) {
                     return db.rollback(function() {
                         throw error;
