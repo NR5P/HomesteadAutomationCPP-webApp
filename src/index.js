@@ -140,13 +140,9 @@ app.post("/irrigation", (req, res) => {
             }
             const irrigationEntryId = results.insertId;
             let irrigationRunTimeData = runTimeArray.map((element, index) => {
-                return {
-                    irrigationId : irrigationEntryId,
-                    runTime : runTimeArray[index],
-                    startTime : startTimeArray[index]
-                }
+                return [irrigationEntryId, runTimeArray[index], startTimeArray[index]]
             })
-            db.query('INSERT INTO irrigationRunTimes SET ?', irrigationRunTimeData, function() {
+            db.query('INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES ?', [irrigationRunTimeData], function() {
                 if (error) {
                     return db.rollback(function() {
                         throw error;
