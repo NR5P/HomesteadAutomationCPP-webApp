@@ -8,8 +8,9 @@
     <label for="notes">Notes: </label>           
     <input type="textarea" id="notes" name="notes" value="">
 
+    <div class="times-div">
     <div class="hr-min-sec-time">
-        <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+        <label for="cycleOnTimeHr" class="cycleOnTime">Cycle On Time Hr:Min:Sec </label>
         <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="">
         <span class="colon">:</span>   
         <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="">
@@ -20,10 +21,12 @@
     <div class="on-times">
         <label for="onTime">On Time(s)</label>
         <div>
-            <input type="time" name="onTime"><span><button type="button" class="delete-btn">Delete</button></span>
+            <input type="time" name="onTime"><span></span>
         </div>
-        <button type="button" id="addAnothertime" onclick="IrrigationDevice.renderAnotherStartTime()">Add Another Time</button>
     </div>
+    </div>
+    <button type="button" class="delete-btn">Delete</button>
+    <button type="button" id="addAnothertime">Add Another Time</button>
 
     <button type="submit" class="form-submit">Add</button>
     <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
@@ -32,10 +35,34 @@
 <script>
     document.getElementById("addAnothertime").addEventListener("click", (e) => {
         const addAnotherBtn = document.getElementById("addAnothertime");
-        const elementToAdd = '<input type="time" name="onTime"><span><button class="delete-btn">Delete</button></span>';
+
+        const elementToAddStartTime = `<label for="cycleOnTimeHr" class="cycleOnTime">Cycle On Time Hr:Min:Sec </label>
+                                        <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="">
+                                        <span class="colon">:</span>   
+                                        <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="">
+                                        <span class="colon">:</span>   
+                                        <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="">`;
+        const divToAddForStartTime = document.createElement("div");
+        divToAddForStartTime.className = "hr-min-sec-time";
+        divToAddForStartTime.innerHTML = elementToAddStartTime;
+
+        const elementToAddOnTime = `<div class="on-times">
+                                    <label for="onTime">On Time(s)</label>
+                                    <div><input type="time" name="onTime"><span></span></div></div>`;
         const divToAdd = document.createElement("div");
-        divToAdd.innerHTML = elementToAdd;
-        e.currentTarget.parentNode.insertBefore(divToAdd,addAnotherBtn);
+        divToAdd.innerHTML = elementToAddOnTime;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.innerHTML = "Delete";
+
+        const timesDiv = document.createElement("div");
+        timesDiv.className = "times-div";
+        timesDiv.appendChild(divToAddForStartTime);
+        timesDiv.appendChild(divToAdd);
+
+        e.currentTarget.parentNode.insertBefore(timesDiv,addAnotherBtn);
+        e.currentTarget.parentNode.insertBefore(deleteBtn,addAnotherBtn);
     })
 
     document.querySelector(".on-times").addEventListener("click", (e) => {
