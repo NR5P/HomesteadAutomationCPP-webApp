@@ -154,7 +154,7 @@ app.post("/irrigation", (req, res) => {
                             throw err;
                         });
                     }
-                    console.log("successful entry");
+                    res.render("index");
                 })
             })
         })
