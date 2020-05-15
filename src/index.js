@@ -49,7 +49,35 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/api/devices",(req,res) => {
+app.get("/api/irrigationDevices",(req,res) => {
+    let irrigationDevices = [];
+    const sql = `SELECT irrigation.id, irrigation.pin, irrigation.name, irrigation.notes, irrigation.state, irrigationRunTimes.runTime, irrigationRunTimes.startTime FROM irrigation JOIN irrigationRunTimes ON irrigation.id = irrigationRunTimes.irrigationId;`;
+    db.query(sql, function(error, results, fields) {
+        if (error) throw error;
+        let cycleObject = {};
+        results.forEach(element => {
+            if (element.id === cycleObject.id) {
+                cycleObject.cycleOnTimeArray.push(element.runTime);
+                cycleObject.startTimesArray.push(element.startTime);
+            } else {
+                if (Object.keys(cycleObject).length !== 0) {
+                    irrigationDevices.push(cycleObject); 
+                }
+                cycleObject.cycleOnTimeArray = []
+                cycleObject.startTimesArray = []
+                cycleObject.id = element.id;
+                cycleObject.pin = element.pin;
+                cycleObject.name = element.name;
+                cycleObject.notes = element.notes;
+                cycleObject.state = element.state;
+                cycleObject.cycleOnTimeArray.push(element.runTime);
+                cycleObject.startTimesArray.push(element.startTime);
+            }
+        });
+        irrigationDevices.push(cycleObject); 
+        res.json(irrigationDevices);
+    })
+    db.end();
     /*
     cycleIrrigationSchema.find({
 
