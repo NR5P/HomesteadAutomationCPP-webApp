@@ -32,9 +32,3 @@ window.onload = () => {
     }
 }
 
-// load event listeners
-/*
-window.onload = () => {
-    IrrigationDevice.loadEventListeners();
-}
-*/
