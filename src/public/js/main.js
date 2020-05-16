@@ -14,9 +14,7 @@ window.onload = () => {
                 )
             })
         })
-}
 
-window.onload = () => {
     const addDeviceBtn = document.getElementById("drop-btn");
     const dropdownContent = document.getElementById("dropdown-content");
     if (addDeviceBtn !== null) {
@@ -30,5 +28,6 @@ window.onload = () => {
             }
         })
     }
+
 }
 

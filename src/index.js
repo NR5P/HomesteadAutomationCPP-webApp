@@ -78,22 +78,6 @@ app.get("/api/irrigationDevices",(req,res) => {
         res.json(irrigationDevices);
     })
     db.end();
-    /*
-    cycleIrrigationSchema.find({
-
-    })
-    .then(cycle => {
-        irrigationSchema.find({
-
-        })
-        .then(irrigate => {
-            res.json({
-                cycle,
-                irrigate
-            })
-        })
-    })
-    */
 })
 
 app.get("/settings", (req, res) => {

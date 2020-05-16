@@ -22,6 +22,9 @@ export class IrrigationDevice extends Device{
      *********************************************************************/
     renderDeviceSettings(event) {
         let formElement = document.createElement("form");
+        formElement.id = "deviceForm";
+        formElement.action = "/irrigation";
+        formElement.method = "POST";
 
         let form = `
             <form class="deviceForm" id="deviceForm" action="/irrigation" method="POST"> 
@@ -36,7 +39,6 @@ export class IrrigationDevice extends Device{
 
                 ${
                     this.cycleOnTimeArray.map((element, index) => {
-                        console.log(element.substr(11, 12));
                         return `<div class="hr-min-sec-time">
                             <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
                             <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substr(11, 12)}">
@@ -60,7 +62,6 @@ export class IrrigationDevice extends Device{
                 <button type="submit" class="form-submit">Add</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
             </form>
-            <script src="./irrigation.js"></script>
         `;
 
 
@@ -72,6 +73,45 @@ export class IrrigationDevice extends Device{
         } else {
             event.target.parentNode.removeChild(event.target.nextSibling);
         }
-        
+
+        document.getElementById("addAnothertime").addEventListener("click", (e) => {
+            const addAnotherBtn = document.getElementById("addAnothertime");
+
+            const elementToAddStartTime = `<label for="cycleOnTimeHr" class="cycleOnTime">Cycle On Time Hr:Min:Sec </label>
+                                            <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="">
+                                            <span class="colon">:</span>   
+                                            <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="">
+                                            <span class="colon">:</span>   
+                                            <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="">`;
+            const divToAddForStartTime = document.createElement("div");
+            divToAddForStartTime.className = "hr-min-sec-time";
+            divToAddForStartTime.innerHTML = elementToAddStartTime;
+
+            const elementToAddOnTime = `<label for="onTime">On Time(s)</label>
+                                        <div><input type="time" name="onTime"><span></span></div>`;
+            const divToAdd = document.createElement("div");
+            divToAdd.className = "on-times";
+            divToAdd.innerHTML = elementToAddOnTime;
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn";
+            deleteBtn.type = "button";
+            deleteBtn.innerHTML = "Delete";
+
+            const timesDiv = document.createElement("div");
+            timesDiv.className = "times-div";
+            timesDiv.appendChild(divToAddForStartTime);
+            timesDiv.appendChild(divToAdd);
+            timesDiv.appendChild(deleteBtn);
+
+            e.currentTarget.parentNode.insertBefore(timesDiv,addAnotherBtn);
+        })
+
+        document.getElementById("deviceForm").addEventListener("click", (e) => {
+            if (e.target.className === "delete-btn") {
+                console.log(e.target.parentNode.parentNode.parentNode)
+                e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+            }
+        })
     }
 };
