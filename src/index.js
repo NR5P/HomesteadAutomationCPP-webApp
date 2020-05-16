@@ -54,15 +54,16 @@ app.get("/api/irrigationDevices",(req,res) => {
     const sql = `SELECT irrigation.id, irrigation.pin, irrigation.name, irrigation.notes, irrigation.state, irrigationRunTimes.runTime, irrigationRunTimes.startTime FROM irrigation JOIN irrigationRunTimes ON irrigation.id = irrigationRunTimes.irrigationId;`;
     db.query(sql, function(error, results, fields) {
         if (error) throw error;
-        let cycleObject = {};
+        let cycleObject;
         results.forEach(element => {
-            if (element.id === cycleObject.id) {
+            if (cycleObject !== undefined && element.id == cycleObject.id) {
                 cycleObject.cycleOnTimeArray.push(element.runTime);
                 cycleObject.startTimesArray.push(element.startTime);
             } else {
-                if (Object.keys(cycleObject).length !== 0) {
+                if (cycleObject !== undefined && Object.keys(cycleObject).length !== 0) {
                     irrigationDevices.push(cycleObject); 
                 }
+                cycleObject = {};
                 cycleObject.cycleOnTimeArray = []
                 cycleObject.startTimesArray = []
                 cycleObject.id = element.id;

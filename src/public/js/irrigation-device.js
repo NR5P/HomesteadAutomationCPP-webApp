@@ -41,11 +41,11 @@ export class IrrigationDevice extends Device{
                     this.cycleOnTimeArray.map((element, index) => {
                         return `<div class="hr-min-sec-time">
                             <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
-                            <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substr(11, 12)}">
+                            <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substr(11, 14)}">
                             <span class="colon">:</span>   
                             <input type="number" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${element.substr(14, 15)}">
                             <span class="colon">:</span>   
-                            <input type="number" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${element.substr(17, 18)}">
+                            <input type="number" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${element.substr(17, 20)}">
                         </div>
 
                         <div class="on-times">
