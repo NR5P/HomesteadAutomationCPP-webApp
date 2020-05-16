@@ -80,46 +80,6 @@ app.get("/api/irrigationDevices",(req,res) => {
     })
 })
 
-app.get("/settings", (req, res) => {
-    /*
-    settingsSchema.find({}).then((setting) => {
-        res.render("settings", {
-            setting: setting
-        });
-    });
-    */
-
-});
-
-app.post("/settings", (req, res) => {
-   const sql = `INSERT INTO settings (userName, password, phoneNumber, email, timeFormat24Hr) VALUES (
-    ${req.body.userName}, ${req.body.password}, ${req.body.phoneNumber}, ${req.body.email}, ${req.body.time-format-24} 
-   )`;
-   db.query(sql, function(err, result) {
-        if(err) throw err;
-   });
-});
-
-app.get("/cycleIrrigation", (req, res) => {
-    res.render("cycleIrrigation");
-});
-
-app.get("/irrigation", (req, res) => {
-    res.render("irrigation");
-});
-
-app.post("/cycleIrrigation", (req, res) => {
-    const sql = `INSERT INTO cycleIrrigation (pin, name, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
-                 cycleOffTimeHr, cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) VALUES (
-                 ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}, ${req.body.cycleOnTimeHr},
-                 ${req.body.cycleOnTimeMin}, ${req.body.cycleOnTimeSec}, ${req.body.cycleOffTimeHr}, ${req.body.cycleOffTimeMin},
-                 ${req.body.cycleOffTimeSec}, ${req.body.blackoutStartTime}, ${req.body.blackoutStopTime})
-                 )`;
-   db.query(sql, function(err, result) {
-        if(err) throw err;
-   });
-});
-
 app.post("/irrigation", (req, res) => {
     let runTimeArray = [];
     let startTimeArray = [];
@@ -172,6 +132,52 @@ app.post("/irrigation", (req, res) => {
         })
    })
 });
+
+app.put("/irrigation", (req, res) => {
+    
+})
+
+
+app.get("/settings", (req, res) => {
+    /*
+    settingsSchema.find({}).then((setting) => {
+        res.render("settings", {
+            setting: setting
+        });
+    });
+    */
+
+});
+
+app.post("/settings", (req, res) => {
+   const sql = `INSERT INTO settings (userName, password, phoneNumber, email, timeFormat24Hr) VALUES (
+    ${req.body.userName}, ${req.body.password}, ${req.body.phoneNumber}, ${req.body.email}, ${req.body.time-format-24} 
+   )`;
+   db.query(sql, function(err, result) {
+        if(err) throw err;
+   });
+});
+
+app.get("/cycleIrrigation", (req, res) => {
+    res.render("cycleIrrigation");
+});
+
+app.get("/irrigation", (req, res) => {
+    res.render("irrigation");
+});
+
+app.post("/cycleIrrigation", (req, res) => {
+    const sql = `INSERT INTO cycleIrrigation (pin, name, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
+                 cycleOffTimeHr, cycleOffTimeMin, cycleOffTimeSec, blackoutStartTime, blackoutStopTime) VALUES (
+                 ${req.body.pin}, ${req.body.name}, ${req.body.notes}, ${req.body.state}, ${req.body.cycleOnTimeHr},
+                 ${req.body.cycleOnTimeMin}, ${req.body.cycleOnTimeSec}, ${req.body.cycleOffTimeHr}, ${req.body.cycleOffTimeMin},
+                 ${req.body.cycleOffTimeSec}, ${req.body.blackoutStartTime}, ${req.body.blackoutStopTime})
+                 )`;
+   db.query(sql, function(err, result) {
+        if(err) throw err;
+   });
+});
+
 
 const PORT = process.env.PORT || 5000; // check port number environment variable first
     

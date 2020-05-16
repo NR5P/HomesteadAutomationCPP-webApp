@@ -39,9 +39,6 @@ export class IrrigationDevice extends Device{
 
                 ${
                     this.cycleOnTimeArray.map((element, index) => {
-                        console.log(element.substr(11,13));
-                        console.log(element.substr(14,16));
-                        console.log(element.substr(17,19));
                         return `<div class="hr-min-sec-time">
                             <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
                             <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substring(11, 13)}">
@@ -54,7 +51,7 @@ export class IrrigationDevice extends Device{
                         <div class="on-times">
                             <label for="onTime">On Time(s)</label>
                             <div>
-                                <input type="time" name="onTime" value="${this.startTimesArray[index]}"><span></span>
+                                <input type="time" class="onTime" name="onTime" value="${this.startTimesArray[index]}"><span></span>
                             </div>
                             <button type="button" class="delete-btn">Delete</button>
                         </div>`
@@ -62,7 +59,7 @@ export class IrrigationDevice extends Device{
                 }
                 <button type="button" id="addAnothertime">Add Another Time</button>
 
-                <button type="submit" class="form-submit">Modify</button>
+                <button type="button" id="form-submit">Modify</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
             </form>
         `;
@@ -115,6 +112,32 @@ export class IrrigationDevice extends Device{
                 console.log(e.target.parentNode.parentNode.parentNode)
                 e.target.parentNode.parentNode.removeChild(e.target.parentNode);
             }
+        })
+        
+        document.getElementById("form-submit").addEventListener("click", () => {
+            let data = {
+                pin : document.getElementById("pin").value;
+                name : document.getElementById("name").value;
+                notes : document.getElementById("notes").value;
+                cycleOnTimeHr : document.getElementsByClassName("cycleOnTimeHr").value;
+                cycleOnTimeMin : document.getElementsByClassName("cycleOnTimeMin").value;
+                cycleOnTimeSec : document.getElementsByClassName("cycleOnTimeSec").value;
+                onTime : document.getElementsByClassName("onTime").value;
+            }
+            fetch("/irrigation", {
+                method : "PUT",
+                headers : {
+                    'Content-Type': 'application/json',
+                },
+                body : JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("success");
+            })
+            .catch(error => {
+                console.log(error);
+            })
         })
     }
 };
