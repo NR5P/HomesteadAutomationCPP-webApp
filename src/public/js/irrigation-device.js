@@ -39,13 +39,16 @@ export class IrrigationDevice extends Device{
 
                 ${
                     this.cycleOnTimeArray.map((element, index) => {
+                        console.log(element.substr(11,13));
+                        console.log(element.substr(14,16));
+                        console.log(element.substr(17,19));
                         return `<div class="hr-min-sec-time">
                             <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
-                            <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substr(11, 14)}">
+                            <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substring(11, 13)}">
                             <span class="colon">:</span>   
-                            <input type="number" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${element.substr(14, 15)}">
+                            <input type="number" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${element.substring(14, 16)}">
                             <span class="colon">:</span>   
-                            <input type="number" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${element.substr(17, 20)}">
+                            <input type="number" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${element.substring(17, 19)}">
                         </div>
 
                         <div class="on-times">
@@ -59,7 +62,7 @@ export class IrrigationDevice extends Device{
                 }
                 <button type="button" id="addAnothertime">Add Another Time</button>
 
-                <button type="submit" class="form-submit">Add</button>
+                <button type="submit" class="form-submit">Modify</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
             </form>
         `;

@@ -78,7 +78,6 @@ app.get("/api/irrigationDevices",(req,res) => {
         irrigationDevices.push(cycleObject); 
         res.json(irrigationDevices);
     })
-    db.end();
 })
 
 app.get("/settings", (req, res) => {
