@@ -26,7 +26,6 @@ export class IrrigationDevice extends Device{
         formElement.method = "POST";
 
         let form = `
-            <form class="deviceForm" id="deviceForm" action="/irrigation" method="POST"> 
                 <label for="name">Name: </label>           
                 <input type="text" id="name" name="name" value="${this.name}">
 
@@ -60,7 +59,6 @@ export class IrrigationDevice extends Device{
 
                 <button type="button" class="form-submit" id="form-submit">Modify</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
-            </form>
         `;
 
 
@@ -108,7 +106,6 @@ export class IrrigationDevice extends Device{
 
         document.getElementById("deviceForm").addEventListener("click", (e) => {
             if (e.target.className === "delete-btn") {
-                console.log(e.target.parentNode.parentNode.parentNode)
                 e.target.parentNode.parentNode.removeChild(e.target.parentNode);
             }
         })
@@ -119,11 +116,14 @@ export class IrrigationDevice extends Device{
                 pin : document.getElementById("pin").value,
                 name : document.getElementById("name").value,
                 notes : document.getElementById("notes").value,
-                cycleOnTimeHr : document.getElementsByClassName("cycleOnTimeHr").value,
-                cycleOnTimeMin : document.getElementsByClassName("cycleOnTimeMin").value,
-                cycleOnTimeSec : document.getElementsByClassName("cycleOnTimeSec").value,
-                onTime : document.getElementsByClassName("onTime").value,
+                cycleOnTimeHr : Array.from(document.getElementsByClassName("cycleOnTimeHr")).map(element => element.value),
+                cycleOnTimeMin : Array.from(document.getElementsByClassName("cycleOnTimeMin")).map(element => element.value),
+                cycleOnTimeSec : Array.from(document.getElementsByClassName("cycleOnTimeSec")).map(element => element.value),
+                onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.textContent)
             }
+            console.log(data.cycleOnTimeHr);
+            console.log(data.cycleOnTimeMin);
+            console.log(data.cycleOnTimeSec);
             fetch("/irrigation", {
                 method : "PUT",
                 headers : {

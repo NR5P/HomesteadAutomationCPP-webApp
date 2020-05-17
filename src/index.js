@@ -156,8 +156,6 @@ app.put("/irrigation", (req, res) => {
        notes : req.body.notes,
        state : req.body.state
     }
-    console.log(req.body.id);
-
     db.beginTransaction(function(err) {
         db.query("UPDATE irrigation SET name = ?, pin = ?, notes = ? WHERE id = ?", [req.body.name, req.body.pin, req.body.notes, req.body.id], (error) => {
             if (error) {
