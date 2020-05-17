@@ -119,7 +119,7 @@ export class IrrigationDevice extends Device{
                 cycleOnTimeHr : Array.from(document.getElementsByClassName("cycleOnTimeHr")).map(element => element.value),
                 cycleOnTimeMin : Array.from(document.getElementsByClassName("cycleOnTimeMin")).map(element => element.value),
                 cycleOnTimeSec : Array.from(document.getElementsByClassName("cycleOnTimeSec")).map(element => element.value),
-                onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.textContent)
+                onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.value)
             }
             console.log(data.cycleOnTimeHr);
             console.log(data.cycleOnTimeMin);
