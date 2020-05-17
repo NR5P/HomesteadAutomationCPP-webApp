@@ -37,8 +37,8 @@ export class IrrigationDevice extends Device{
 
                 ${
                     this.cycleOnTimeArray.map((element, index) => {
-                        return `<div class="hr-min-sec-time">
-                            <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
+                        return `<div class="times-div"><div class="hr-min-sec-time">
+                            <label for="cycleOnTimeHr" class="cycleOnTime">Cycle On Time Hr:Min:Sec </label>
                             <input type="number" class="cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${element.substring(11, 13)}">
                             <span class="colon">:</span>   
                             <input type="number" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${element.substring(14, 16)}">
@@ -51,6 +51,7 @@ export class IrrigationDevice extends Device{
                             <div>
                                 <input type="time" class="onTime" name="onTime" value="${this.startTimesArray[index]}"><span></span>
                             </div>
+                        </div>
                             <button type="button" class="delete-btn">Delete</button>
                         </div>`
                     })
