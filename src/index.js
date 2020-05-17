@@ -134,7 +134,70 @@ app.post("/irrigation", (req, res) => {
 });
 
 app.put("/irrigation", (req, res) => {
-    
+    let runTimeArray = [];
+    let startTimeArray = [];
+    let index = 0;
+    runTimeArray[index] = `0000-00-00T${req.body.cycleOnTimeHr}:${req.body.cycleOnTimeMin}:${req.body.cycleOnTimeSec}`;
+    if (req.body.cycleOnTimeHr instanceof Array) {
+        runTimeArray = req.body.cycleOnTimeHr.map((element, index) => {
+                return `0000-00-00T${req.body.cycleOnTimeHr[index]}:${req.body.cycleOnTimeMin[index]}:${req.body.cycleOnTimeSec[index]}`;
+        })
+    } 
+    startTimeArray[index] = req.body.onTime;
+    if (req.body.onTime instanceof Array) {
+        startTimeArray = req.body.onTime.map((element, index) => {
+            return element;
+        })
+    } 
+
+    const irrigationData = {
+       pin : req.body.pin,
+       name : req.body.name,
+       notes : req.body.notes,
+       state : req.body.state
+    }
+
+
+    db.beginTransaction(function(err) {
+        db.query("UPDATE irrigation SET name = ?, notes = ? WHERE id = ?", [req.body.name, req.body.notes, req.body.id], (error) => {
+            if (error) {
+                return db.rollback(function() {
+                    console.log("update");
+                    throw error;
+                });
+            }
+            db.query("DELETE FROM irrigationRunTimes WHERE irrigationId = ?", [req.body.id], (error) => {
+                if (error) {
+                    return db.rollback(function() {
+                        console.log("delete");
+                        throw error;
+                    });
+                }
+                const irrigationId = req.body.id;
+                let irrigationRunTimeData = runTimeArray.map((element, index) => {
+                    return [irrigationId, runTimeArray[index], startTimeArray[index]]
+                })
+                db.query('INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES ?', [irrigationRunTimeData], function() {
+                    if (error) {
+                        return db.rollback(function() {
+                            console.log("insert");
+                            throw error;
+                        });
+                    }
+                    db.commit(function(err) {
+                        if (error) {
+                            return db.rollback(function() {
+                                console.log("commit");
+                                throw error;
+                            });
+                        }
+                        res.json({success : "Updated Successfully", status : 200});
+                    })
+                })
+  
+            })
+        })
+    });
 })
 
 

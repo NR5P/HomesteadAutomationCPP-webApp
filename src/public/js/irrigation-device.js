@@ -59,7 +59,7 @@ export class IrrigationDevice extends Device{
                 }
                 <button type="button" id="addAnothertime">Add Another Time</button>
 
-                <button type="button" id="form-submit">Modify</button>
+                <button type="button" class="form-submit" id="form-submit">Modify</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
             </form>
         `;
@@ -116,13 +116,14 @@ export class IrrigationDevice extends Device{
         
         document.getElementById("form-submit").addEventListener("click", () => {
             let data = {
-                pin : document.getElementById("pin").value;
-                name : document.getElementById("name").value;
-                notes : document.getElementById("notes").value;
-                cycleOnTimeHr : document.getElementsByClassName("cycleOnTimeHr").value;
-                cycleOnTimeMin : document.getElementsByClassName("cycleOnTimeMin").value;
-                cycleOnTimeSec : document.getElementsByClassName("cycleOnTimeSec").value;
-                onTime : document.getElementsByClassName("onTime").value;
+                id : this.id,
+                pin : document.getElementById("pin").value,
+                name : document.getElementById("name").value,
+                notes : document.getElementById("notes").value,
+                cycleOnTimeHr : document.getElementsByClassName("cycleOnTimeHr").value,
+                cycleOnTimeMin : document.getElementsByClassName("cycleOnTimeMin").value,
+                cycleOnTimeSec : document.getElementsByClassName("cycleOnTimeSec").value,
+                onTime : document.getElementsByClassName("onTime").value,
             }
             fetch("/irrigation", {
                 method : "PUT",
@@ -133,7 +134,9 @@ export class IrrigationDevice extends Device{
             })
             .then(response => response.json())
             .then(data => {
-                console.log("success");
+                if (data.status == 200)
+                    console.log("success");
+                    //TODO:
             })
             .catch(error => {
                 console.log(error);
