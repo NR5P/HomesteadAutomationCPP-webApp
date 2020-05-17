@@ -5,7 +5,6 @@ import {Device} from "./device.js"
  *********************************************************************/
 export class IrrigationDevice extends Device{
     constructor(id, name, pin, notes, state, cycleOnTimeArray, startTimesArray) {
-
         super(id, name, pin, notes, state);
 
         this.cycleOnTimeArray = cycleOnTimeArray || [];

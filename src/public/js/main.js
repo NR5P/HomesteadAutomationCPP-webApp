@@ -10,7 +10,7 @@ window.onload = () => {
         .then(data => {
             data.forEach(function(item) {
                 arrDevices.push(new IrrigationDevice(
-                    item._id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeArray, item.startTimesArray)
+                    item.id,item.name,item.pin,item.notes, item.state, item.cycleOnTimeArray, item.startTimesArray)
                 )
             })
         })

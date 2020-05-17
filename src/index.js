@@ -156,20 +156,18 @@ app.put("/irrigation", (req, res) => {
        notes : req.body.notes,
        state : req.body.state
     }
-
+    console.log(req.body.id);
 
     db.beginTransaction(function(err) {
-        db.query("UPDATE irrigation SET name = ?, notes = ? WHERE id = ?", [req.body.name, req.body.notes, req.body.id], (error) => {
+        db.query("UPDATE irrigation SET name = ?, pin = ?, notes = ? WHERE id = ?", [req.body.name, req.body.pin, req.body.notes, req.body.id], (error) => {
             if (error) {
                 return db.rollback(function() {
-                    console.log("update");
                     throw error;
                 });
             }
             db.query("DELETE FROM irrigationRunTimes WHERE irrigationId = ?", [req.body.id], (error) => {
                 if (error) {
                     return db.rollback(function() {
-                        console.log("delete");
                         throw error;
                     });
                 }
@@ -180,14 +178,12 @@ app.put("/irrigation", (req, res) => {
                 db.query('INSERT INTO irrigationRunTimes (irrigationId, runTime, startTime) VALUES ?', [irrigationRunTimeData], function() {
                     if (error) {
                         return db.rollback(function() {
-                            console.log("insert");
                             throw error;
                         });
                     }
                     db.commit(function(err) {
                         if (error) {
                             return db.rollback(function() {
-                                console.log("commit");
                                 throw error;
                             });
                         }
