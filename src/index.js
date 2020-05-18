@@ -194,6 +194,36 @@ app.put("/irrigation", (req, res) => {
     });
 })
 
+app.delete("/irrigation", (req, res) => {
+    db.beginTransaction(function(err) {
+        db.query("DELETE FROM irrigationRunTimes WHERE irrigationId = ?" [req.body.id],(error) => {
+            if (error) {
+                return db.rollback(function() {
+                    throw error;
+                });
+            }
+            db.query("DELETE FROM irrigation WHERE id = ?" [req.body.id],(error) => {
+                if (error) {
+                    return db.rollback(function() {
+                        throw error;
+                    });
+                }
+                db.commit(function(err) {
+                    if (error) {
+                        return db.rollback(function() {
+                            throw error;
+                        });
+                    }
+                    res.json({success : "Updated Successfully", status : 200});
+                });
+            }):
+        })
+    })
+})
+
+app.get("/irrigation", (req, res) => {
+    res.render("irrigation");
+});
 
 app.get("/settings", (req, res) => {
     /*
@@ -219,9 +249,6 @@ app.get("/cycleIrrigation", (req, res) => {
     res.render("cycleIrrigation");
 });
 
-app.get("/irrigation", (req, res) => {
-    res.render("irrigation");
-});
 
 app.post("/cycleIrrigation", (req, res) => {
     const sql = `INSERT INTO cycleIrrigation (pin, name, notes, state, cycleOnTimeHr, cycleOnTimeMin, cycleOnTimeSec,
