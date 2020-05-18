@@ -59,6 +59,7 @@ export class IrrigationDevice extends Device{
                 <button type="button" id="addAnothertime">Add Another Time</button>
 
                 <button type="button" class="form-submit" id="form-submit">Modify</button>
+                <button type="button" class="form-delete" id="form-delete">Delete</button>
                 <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
         `;
 
@@ -122,9 +123,6 @@ export class IrrigationDevice extends Device{
                 cycleOnTimeSec : Array.from(document.getElementsByClassName("cycleOnTimeSec")).map(element => element.value),
                 onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.value)
             }
-            console.log(data.cycleOnTimeHr);
-            console.log(data.cycleOnTimeMin);
-            console.log(data.cycleOnTimeSec);
             fetch("/irrigation", {
                 method : "PUT",
                 headers : {
@@ -142,5 +140,29 @@ export class IrrigationDevice extends Device{
                 console.log(error);
             })
         })
+
+        document.getElementById("form-delete").addEventListener("click", () => {
+            let data = {
+                id : this.id
+            }
+            fetch("/irrigation", {
+                method : "DELETE",
+                headers : {
+                    'Content-Type': 'application/json',
+                },
+                body : JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status == 200)
+                    console.log("success");
+                    //TODO:
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+
+
     }
 };

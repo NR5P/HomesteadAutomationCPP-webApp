@@ -196,13 +196,13 @@ app.put("/irrigation", (req, res) => {
 
 app.delete("/irrigation", (req, res) => {
     db.beginTransaction(function(err) {
-        db.query("DELETE FROM irrigationRunTimes WHERE irrigationId = ?" [req.body.id],(error) => {
+        db.query("DELETE FROM irrigationRunTimes WHERE irrigationId = ?", [req.body.id], (error) => {
             if (error) {
                 return db.rollback(function() {
                     throw error;
                 });
             }
-            db.query("DELETE FROM irrigation WHERE id = ?" [req.body.id],(error) => {
+            db.query("DELETE FROM irrigation WHERE id = ?", [req.body.id], (error) => {
                 if (error) {
                     return db.rollback(function() {
                         throw error;
@@ -214,9 +214,9 @@ app.delete("/irrigation", (req, res) => {
                             throw error;
                         });
                     }
-                    res.json({success : "Updated Successfully", status : 200});
+                    res.render("index");
                 });
-            }):
+            });
         })
     })
 })
