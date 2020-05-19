@@ -14,6 +14,17 @@ window.onload = () => {
                 )
             })
         })
+    fetch("/api/cycleIrrigationDevices", {method: "GET"})
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(function(item) {
+                arrDevices.push(new CycleIrrigationDevice(
+                    item.id, item.name, item.pin, item.notes, item.state, item.cycleOnTimeHr, item.cycleOnTimeMin, 
+                    item.cycleOnTimeSec, item.cycleOffTimeHr, item.cycleOffTimeMin, item.cycleOffTimeSec, 
+                    item.blackoutStartTime, item.blackoutStopTime
+                ))
+            })
+        })
 
     const addDeviceBtn = document.getElementById("drop-btn");
     const dropdownContent = document.getElementById("dropdown-content");
