@@ -17,6 +17,7 @@ window.onload = () => {
     fetch("/api/cycleIrrigationDevices", {method: "GET"})
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             data.forEach(function(item) {
                 arrDevices.push(new CycleIrrigationDevice(
                     item.id, item.name, item.pin, item.notes, item.state, item.cycleOnTimeHr, item.cycleOnTimeMin, 

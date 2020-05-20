@@ -74,8 +74,8 @@ app.get("/api/irrigationDevices",(req,res) => {
                 cycleObject.cycleOnTimeArray.push(element.runTime);
                 cycleObject.startTimesArray.push(element.startTime);
             }
+            irrigationDevices.push(cycleObject); 
         });
-        irrigationDevices.push(cycleObject); 
         res.json(irrigationDevices);
     })
 })
@@ -233,13 +233,13 @@ app.get("/api/cycleIrrigationDevices", (req, res) => {
     let cycleIrrigationDevices = [];
     const sql = "SELECT * FROM cycleIrrigation;";
     db.query(sql,(error, results) => {
-        if (err) {
+        if (error) {
             return db.rollback(function() {
-                throw err;
+                throw error;
             })
         }
-        let device;
         results.forEach(element => {
+            let device = {};
             device.pin = element.pin;
             device.name = element.name;
             device.notes = element.notes;
@@ -255,8 +255,8 @@ app.get("/api/cycleIrrigationDevices", (req, res) => {
 
             cycleIrrigationDevices.push(device);
         }) 
+        res.json(cycleIrrigationDevices);
     })
-    res.json(cycleIrrigationDevices);
 })
 
 
