@@ -240,6 +240,7 @@ app.get("/api/cycleIrrigationDevices", (req, res) => {
         }
         results.forEach(element => {
             let device = {};
+            device.id = element.id;
             device.pin = element.pin;
             device.name = element.name;
             device.notes = element.notes;
@@ -291,6 +292,18 @@ app.post("/cycleIrrigation", (req, res) => {
         })
     });
 });
+
+app.put("/cycleIrrigation", (req, res) => {
+    console.log(req.body);
+    db.query("UPDATE cycleIrrigation SET pin = ?, name = ?, notes = ?, cycleOnTimeHr = ?, cycleOnTimeMin = ?, cycleOnTimeSec = ?, cycleOffTimeHr = ?, cycleOffTimeMin = ?, cycleOffTimeSec = ?, blackoutStartTime = ?, blackoutStopTime = ? WHERE id=?", [req.body.pin, req.body.name, req.body.notes, req.body.cycleOnTimeHr, req.body.cycleOnTimeMin, req.body.cycleOnTimeSec, req.body.cycleOffTimeHr, req.body.cycleOffTimeMin, req.body.cycleOffTimeSec, req.body.blackoutStartTime, req.body.blackoutStopTime, req.body.id], (error) => {
+        if (error) {
+            return db.rollback(function() {
+                throw error;
+            });
+        }
+        res.json({success : "Updated Successfully", status : 200});
+    })
+})
 
 
 app.get("/settings", (req, res) => {

@@ -50,32 +50,32 @@ export class CycleIrrigationDevice extends Device{
 
                 <div class="hr-min-sec-time">
                     <label for="cycleOnTimeHr">Cycle On Time Hr:Min:Sec </label>
-                    <input type="number" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${this.cycleOnTimeHr}">
+                    <input type="number" id="cycleOnTimeHr" class"cycleOnTimeHr" name="cycleOnTimeHr" step="1" value="${this.cycleOnTimeHr}">
                     <span class="colon">:</span>   
-                    <input type="number" class"cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${this.cycleOnTimeMin}">
+                    <input type="number" id="cycleOnTimeMin" class="cycleOnTimeMin" name="cycleOnTimeMin" step="1" value="${this.cycleOnTimeMin}">
                     <span class="colon">:</span>   
-                    <input type="number" class"cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
+                    <input type="number" id="cycleOnTimeSec" class="cycleOnTimeSec" name="cycleOnTimeSec" step="1" value="${this.cycleOnTimeSec}">
                 </div>
 
                 <div class="hr-min-sec-time">
                     <label for="cycleOffTimeHr">Cycle Off Time Hr:Min:Sec </label>
-                    <input type="number" class"cycleOffTimeHr" name="cycleOffTimeHr" step="1" value="${this.cycleOffTimeHr}">
+                    <input type="number" id="cycleOffTimeHr" class="cycleOffTimeHr" name="cycleOffTimeHr" step="1" value="${this.cycleOffTimeHr}">
                     <span class="colon">:</span>   
-                    <input type="number" class"cycleOffTimeMin" name="cycleOffTimeMin" step="1" value="${this.cycleOffTimeMin}">
+                    <input type="number" id="cycleOffTimeMin" class="cycleOffTimeMin" name="cycleOffTimeMin" step="1" value="${this.cycleOffTimeMin}">
                     <span class="colon">:</span>   
-                    <input type="number" class"cycleOffTimeSec" name="cycleOffTimeSec" step="1" value="${this.cycleOffTimeSec}">
+                    <input type="number" id="cycleOffTimeSec" class="cycleOffTimeSec" name="cycleOffTimeSec" step="1" value="${this.cycleOffTimeSec}">
                 </div>
 
 
                 <label for="blackoutStartTime">Blackout Start Time</label>
-                <input type="time" id"blackoutStartTime" name="blackoutStartTime" value="${this.blackoutStartTime}">
+                <input type="time" id="blackoutStartTime" name="blackoutStartTime" value="${this.blackoutStartTime}">
 
                 <label for="blackoutStopTime">Blackout Stop Time</label>
-                <input type="time" id"blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
+                <input type="time" id="blackoutStopTime" name="blackoutStopTime" value="${this.blackoutStopTime}">
 
-                <button type="button" class="form-submit">Submit</button>
-                <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
+                <button type="button" id="form-submit" class="form-submit">Modify</button>
                 <button type="button" class="form-delete">Delete</button>
+                <button type="button" class="form-cancel" onclick = "window.location.href = '/';">Cancel</button>
             </form>
         `;
         formElement.innerHTML = form;
@@ -85,7 +85,38 @@ export class CycleIrrigationDevice extends Device{
         } else {
             event.target.parentNode.removeChild(event.target.nextSibling);
         }
-        console.log(event.target.nextSibling.tagName);
-        console.log(event.target.parentNode);
+        document.getElementById("form-submit").addEventListener("click", () => {
+            let data = {
+                id : this.id,
+                name : document.getElementById("name").value,
+                pin : document.getElementById("pin").value,
+                notes : document.getElementById("notes").value,
+                cycleOnTimeHr : document.getElementById("cycleOnTimeHr").value,
+                cycleOnTimeMin : document.getElementById("cycleOnTimeMin").value,
+                cycleOnTimeSec : document.getElementById("cycleOnTimeSec").value,
+                cycleOffTimeHr : document.getElementById("cycleOffTimeHr").value,
+                cycleOffTimeMin : document.getElementById("cycleOffTimeMin").value,
+                cycleOffTimeSec : document.getElementById("cycleOffTimeSec").value,
+                blackoutStartTime : document.getElementById("blackoutStartTime").value,
+                blackoutStopTime : document.getElementById("blackoutStopTime").value
+            }
+            console.log(data.id);
+            fetch("/cycleIrrigation", {
+                method : "PUT",
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status == 200)
+                    console.log("success");
+                    //TODO:
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
     }
 };

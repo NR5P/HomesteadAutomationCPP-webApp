@@ -1,5 +1,5 @@
 exports.singleToDoubleDigit = (req,res,next) => {
-    if (req.body.cycleOnTimeHr !== undefined) {
+    if (req.body.cycleOnTimeHr !== undefined && req.body.cycleOnTimeHr !== null) {
         if (Array.isArray(req.body.cycleOnTimeHr)) {
             req.body.cycleOnTimeHr.forEach(element => {
                 if (element.length === 1) {
@@ -13,7 +13,7 @@ exports.singleToDoubleDigit = (req,res,next) => {
         }
     }
 
-    if (req.body.cycleOnTimeMin !== undefined) {
+    if (req.body.cycleOnTimeMin !== undefined && req.body.cycleOnTimeHr !== null) {
         if (Array.isArray(req.body.cycleOnTimeHr)) {
             req.body.cycleOnTimeMin.forEach(element => {
                 if (element.length === 1) {
@@ -27,7 +27,7 @@ exports.singleToDoubleDigit = (req,res,next) => {
         }
     }
 
-    if (req.body.cycleOnTimeSec !== undefined) {
+    if (req.body.cycleOnTimeSec !== undefined && req.body.cycleOnTimeHr !== null) {
         if (Array.isArray(req.body.cycleOnTimeHr)) {
             req.body.cycleOnTimeSec.forEach(element => {
                 if (element.length === 1) {
