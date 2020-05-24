@@ -239,14 +239,18 @@ form {
     margin-bottom: 20px;
 }
 .day {
-    padding:30px;
+    padding:30px 0;
     border:3px solid black;
+    width:100%;
 }
 .day-off {
     background-color: #ed2d33;
 }
 .day-on {
     background-color: green;
+}
+.daysToIrrigate input[type=checkbox] {
+    display:none;
 }
 
 
