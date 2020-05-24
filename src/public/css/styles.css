@@ -230,4 +230,24 @@ form {
     font-size:22px;
 }
 
+.daysToIrrigate {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.day {
+    padding:30px;
+    border:3px solid black;
+}
+.day-off {
+    background-color: #ed2d33;
+}
+.day-on {
+    background-color: green;
+}
+
+
 /********************************************************************/
