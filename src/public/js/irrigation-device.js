@@ -4,11 +4,12 @@ import {Device} from "./device.js"
  * for timed irrigation control
  *********************************************************************/
 export class IrrigationDevice extends Device{
-    constructor(id, name, pin, notes, state, cycleOnTimeArray, startTimesArray) {
+    constructor(id, name, pin, notes, state, cycleOnTimeArray, startTimesArray, daysToIrrigate) {
         super(id, name, pin, notes, state);
 
         this.cycleOnTimeArray = cycleOnTimeArray || [];
         this.startTimesArray = startTimesArray || [];
+        this.daysToIrrigate = daysToIrrigate;
         this.btnColor = "#0394fc";
         this.class = "irrigation-device-btn";
             
@@ -25,6 +26,8 @@ export class IrrigationDevice extends Device{
         formElement.action = "/irrigation";
         formElement.method = "POST";
 
+        const weekdays = ["monday", "tuesday", "wendesday", "thursday", "friday", "saturday", "sunday"];
+
         let form = `
                 <label for="name">Name: </label>           
                 <input type="text" id="name" name="name" value="${this.name}">
@@ -34,6 +37,24 @@ export class IrrigationDevice extends Device{
 
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
+
+                <div class="daysToIrrigate">
+                    ${
+                        weekdays.map(day => {
+                            if (this.daysToIrrigate.includes(day.charAt(0).toUpperCase() + day.slice(1))) {
+                                return `
+                                    <label class="day day-on" id="${day}" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
+                                    <input type="checkbox" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
+                                `
+                            } else {
+                                return `
+                                    <label class="day day-off" id="${day}" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
+                                    <input type="checkbox" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
+                                `
+                            }
+                        }).join("") 
+                    }
+                </div>
 
                 ${
                     this.cycleOnTimeArray.map((element, index) => {
@@ -121,7 +142,14 @@ export class IrrigationDevice extends Device{
                 cycleOnTimeHr : Array.from(document.getElementsByClassName("cycleOnTimeHr")).map(element => element.value),
                 cycleOnTimeMin : Array.from(document.getElementsByClassName("cycleOnTimeMin")).map(element => element.value),
                 cycleOnTimeSec : Array.from(document.getElementsByClassName("cycleOnTimeSec")).map(element => element.value),
-                onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.value)
+                onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.value),
+                monday : document.getElementById("monday").value,
+                tuesday : document.getElementById("tuesday").value,
+                wendesday : document.getElementById("wendesday").value,
+                thursday : document.getElementById("thursday").value,
+                friday : document.getElementById("friday").value,
+                saturday : document.getElementById("saturday").value,
+                sunday : document.getElementById("sunday").value
             }
             fetch("/irrigation", {
                 method : "PUT",
@@ -163,6 +191,15 @@ export class IrrigationDevice extends Device{
             })
         })
 
-
+        document.querySelector(".daysToIrrigate").addEventListener("click", (e) => {
+            console.log(e.target.childNodes[1]);
+            if (e.target.childNodes[1].checked === true) {
+                e.target.childNodes[1].checked = false;
+            } else {
+                e.target.childNodes[1].checked = true;
+            }
+            e.target.classList.toggle("day-off");
+            e.target.classList.toggle("day-on");
+        })
     }
 };

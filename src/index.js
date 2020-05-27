@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/irrigationDevices",(req,res) => {
     let irrigationDevices = [];
-    const sql = `SELECT irrigation.id, irrigation.pin, irrigation.name, irrigation.notes, irrigation.state, irrigationRunTimes.runTime, irrigationRunTimes.startTime FROM irrigation JOIN irrigationRunTimes ON irrigation.id = irrigationRunTimes.irrigationId;`;
+    const sql = `SELECT irrigation.id, irrigation.pin, irrigation.name, irrigation.notes, irrigation.state, irrigation.daysToIrrigate, irrigationRunTimes.runTime, irrigationRunTimes.startTime FROM irrigation JOIN irrigationRunTimes ON irrigation.id = irrigationRunTimes.irrigationId;`;
     db.query(sql, function(error, results, fields) {
         if (error) throw error;
         let cycleObject;
@@ -71,6 +71,7 @@ app.get("/api/irrigationDevices",(req,res) => {
                 cycleObject.name = element.name;
                 cycleObject.notes = element.notes;
                 cycleObject.state = element.state;
+                cycleObject.daysToIrrigate = element.daysToIrrigate;
                 cycleObject.cycleOnTimeArray.push(element.runTime);
                 cycleObject.startTimesArray.push(element.startTime);
             }
@@ -97,11 +98,15 @@ app.post("/irrigation", (req, res) => {
         })
     } 
 
+    const daysToIrrigateString = req.body.monday + " " + req.body.tuesday + " " + req.body.wendesday + " " + req.body.thursday + " " + req.body.friday + " " + req.body.saturday + " " + req.body.sunday;
+    console.log(daysToIrrigateString);
+
    const irrigationData = {
        pin : req.body.pin,
        name : req.body.name,
        notes : req.body.notes,
-       state : req.body.state
+       state : req.body.state,
+       daysToIrrigate : daysToIrrigateString
    }
    db.beginTransaction(function(err) {
         db.query('INSERT INTO irrigation SET ?', irrigationData, function(error, results, fields) {
@@ -134,6 +139,7 @@ app.post("/irrigation", (req, res) => {
 });
 
 app.put("/irrigation", (req, res) => {
+    const weekdays = ["monday", "tuesday", "wendesday", "thursday", "friday", "saturday", "sunday"];
     let runTimeArray = [];
     let startTimeArray = [];
     let index = 0;
@@ -150,14 +156,23 @@ app.put("/irrigation", (req, res) => {
         })
     } 
 
+    let daysOfWeekToIrrigate = "";
+
+    weekdays.forEach((day) => {
+        if (req.body[day] !== "undefined" && req.body[day] !== null) {
+            daysOfWeekToIrrigate += day.charAt(0).toUpperCase() + day.slice(1) + " ";
+        }
+    })
+
     const irrigationData = {
        pin : req.body.pin,
        name : req.body.name,
        notes : req.body.notes,
-       state : req.body.state
+       state : req.body.state,
+       daysToIrrigate : daysOfWeekToIrrigate
     }
     db.beginTransaction(function(err) {
-        db.query("UPDATE irrigation SET name = ?, pin = ?, notes = ? WHERE id = ?", [req.body.name, req.body.pin, req.body.notes, req.body.id], (error) => {
+        db.query("UPDATE irrigation SET name = ?, pin = ?, notes = ?, daysToIrrigate = ? WHERE id = ?", [req.body.name, req.body.pin, req.body.notes, daysOfWeekToIrrigate, req.body.id], (error) => {
             if (error) {
                 return db.rollback(function() {
                     throw error;
