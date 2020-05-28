@@ -139,6 +139,7 @@ app.post("/irrigation", (req, res) => {
 });
 
 app.put("/irrigation", (req, res) => {
+    console.log(req.body);
     const weekdays = ["monday", "tuesday", "wendesday", "thursday", "friday", "saturday", "sunday"];
     let runTimeArray = [];
     let startTimeArray = [];

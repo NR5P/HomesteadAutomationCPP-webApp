@@ -43,13 +43,13 @@ export class IrrigationDevice extends Device{
                         weekdays.map(day => {
                             if (this.daysToIrrigate.includes(day.charAt(0).toUpperCase() + day.slice(1))) {
                                 return `
-                                    <label class="day day-on" id="${day}" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
-                                    <input type="checkbox" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
+                                    <label class="day day-on" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
+                                    <input type="checkbox" id="${day}" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}" checked></label>
                                 `
                             } else {
                                 return `
-                                    <label class="day day-off" id="${day}" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
-                                    <input type="checkbox" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
+                                    <label class="day day-off" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
+                                    <input type="checkbox" id="${day}" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
                                 `
                             }
                         }).join("") 
@@ -134,6 +134,7 @@ export class IrrigationDevice extends Device{
         })
         
         document.getElementById("form-submit").addEventListener("click", () => {
+            console.log("form submit click");
             let data = {
                 id : this.id,
                 pin : document.getElementById("pin").value,
@@ -143,14 +144,15 @@ export class IrrigationDevice extends Device{
                 cycleOnTimeMin : Array.from(document.getElementsByClassName("cycleOnTimeMin")).map(element => element.value),
                 cycleOnTimeSec : Array.from(document.getElementsByClassName("cycleOnTimeSec")).map(element => element.value),
                 onTime : Array.from(document.getElementsByClassName("onTime")).map(element => element.value),
-                monday : document.getElementById("monday").value,
-                tuesday : document.getElementById("tuesday").value,
-                wendesday : document.getElementById("wendesday").value,
-                thursday : document.getElementById("thursday").value,
-                friday : document.getElementById("friday").value,
-                saturday : document.getElementById("saturday").value,
-                sunday : document.getElementById("sunday").value
+                monday : document.getElementById("monday").checked,
+                tuesday : document.getElementById("tuesday").checked,
+                wendesday : document.getElementById("wendesday").checked,
+                thursday : document.getElementById("thursday").checked,
+                friday : document.getElementById("friday").checked,
+                saturday : document.getElementById("saturday").checked,
+                sunday : document.getElementById("sunday").checked
             }
+            console.log(data);
             fetch("/irrigation", {
                 method : "PUT",
                 headers : {
