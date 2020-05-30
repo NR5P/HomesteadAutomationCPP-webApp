@@ -43,13 +43,13 @@ export class IrrigationDevice extends Device{
                         weekdays.map(day => {
                             if (this.daysToIrrigate.includes(day.charAt(0).toUpperCase() + day.slice(1))) {
                                 return `
-                                    <label class="day day-on" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
-                                    <input type="checkbox" id="${day}" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}" checked></label>
+                                    <label class="day day-on" for="${day}">
+                                    <input type="checkbox" class="day-checkbox" id="${day}" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}" checked>${day.charAt(0).toUpperCase() + day.slice(1)}</label>
                                 `
                             } else {
                                 return `
-                                    <label class="day day-off" for="${day}">${day.charAt(0).toUpperCase() + day.slice(1)}
-                                    <input type="checkbox" id="${day}" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}"></label>
+                                    <label class="day day-off" for="${day}">
+                                    <input type="checkbox" id="${day}" class="day-checkbox" name="${day}" value="${day.charAt(0).toUpperCase() + day.slice(1)}">${day.charAt(0).toUpperCase() + day.slice(1)}</label>
                                 `
                             }
                         }).join("") 
@@ -194,11 +194,11 @@ export class IrrigationDevice extends Device{
         })
 
         document.querySelector(".daysToIrrigate").addEventListener("click", (e) => {
-            console.log(e.target.childNodes[1]);
-            if (e.target.childNodes[1].checked === true) {
-                e.target.childNodes[1].checked = false;
+            console.log(e.target);
+            if (e.target.nextSibling.checked === true) {
+                e.target.nextSibling.checked = false;
             } else {
-                e.target.childNodes[1].checked = true;
+                e.target.nextSibling.checked = true;
             }
             e.target.classList.toggle("day-off");
             e.target.classList.toggle("day-on");

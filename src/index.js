@@ -160,7 +160,7 @@ app.put("/irrigation", (req, res) => {
     let daysOfWeekToIrrigate = "";
 
     weekdays.forEach((day) => {
-        if (req.body[day] !== "undefined" && req.body[day] !== null) {
+        if (req.body[day] == true) {
             daysOfWeekToIrrigate += day.charAt(0).toUpperCase() + day.slice(1) + " ";
         }
     })
