@@ -1,13 +1,15 @@
 import {CycleIrrigationDevice} from "./cycle-irrigation-device.js"
 import {IrrigationDevice} from "./irrigation-device.js"
+import {Device} from "./device.js"
 
 let arrDevices = []
 
 
 // build the buttons on main page from db
 window.onload = () => {
-    if (document.getElementById("main-area") !== null) {
-        fetch("/api/irrigationDevices", {method: "GET"})
+    //if (document.getElementById("main-area") !== null) {
+    function getIrrigationDevices() {
+        return fetch("/api/irrigationDevices", {method: "GET"})
             .then(res => res.json())
             .then(data => {
                 data.forEach(function(item) {
@@ -16,7 +18,9 @@ window.onload = () => {
                     )
                 })
             })
-        fetch("/api/cycleIrrigationDevices", {method: "GET"})
+    }
+    function getCycleIrrigationDevices() {
+        return fetch("/api/cycleIrrigationDevices", {method: "GET"})
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -28,6 +32,7 @@ window.onload = () => {
                     ))
                 })
             })
+    }
 
         const addDeviceBtn = document.getElementById("drop-btn");
         const dropdownContent = document.getElementById("dropdown-content");
@@ -42,6 +47,27 @@ window.onload = () => {
                 }
             })
         }
+    //}
+    function getAllApis(){
+        return Promise.all([getCycleIrrigationDevices(), getIrrigationDevices()]);
     }
+
+    getAllApis()
+        .then(() => {
+            const selectDiv = document.querySelector(".pin-numbers");
+            let options = "<select name='pin' id='pin'>";
+            if (selectDiv !== null && selectDiv !== undefined) {
+                console.log(Device.pinsUsed);
+                for (let i = 1; i < 11; i += 1) {
+                    if (Device.pinsUsed.includes(i)) {
+                        options += `<option disabled>${i}</option>`
+                    } else {
+                        options += `<option>${i}</option>`
+                    }
+                }
+                options += "</select>"
+                selectDiv.innerHTML = options;
+            }
+        })
 }
 
