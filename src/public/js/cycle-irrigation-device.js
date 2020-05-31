@@ -36,6 +36,15 @@ export class CycleIrrigationDevice extends Device{
         //event.target.innerHTML = "something";
         //console.log(Device.deviceList);
         let formElement = document.createElement("form");
+        let options = "";
+        for (let i = 1; i < 11; i += 1) {
+            if (Device.pinsUsed.includes(i)) {
+                if (i != this.pin)
+                    options += `<option disabled>${i}</option>`
+            } else {
+                options += `<option>${i}</option>`
+            }
+        }
 
         let form = `
             <form class="deviceForm"> 
@@ -43,7 +52,11 @@ export class CycleIrrigationDevice extends Device{
                 <input type="text" id="name" name="name" value="${this.name}">
 
                 <label for="pin">Pin: </label>           
-                <input type="number" id="pin" name="pin" value="${this.pin}">
+                <select name="pin" id="pin">
+                    <option>${this.pin}<option>
+                    ${options}
+                </select>
+
 
                 <label for="notes">Notes: </label>           
                 <input type="textarea" id="notes" name="notes" value="${this.notes}">
@@ -87,7 +100,7 @@ export class CycleIrrigationDevice extends Device{
         }
         document.getElementById("form-submit").addEventListener("click", () => {
             let data = {
-                id : this.id,
+                id : Device.pinsConvertForPi(this.id),
                 name : document.getElementById("name").value,
                 pin : document.getElementById("pin").value,
                 notes : document.getElementById("notes").value,

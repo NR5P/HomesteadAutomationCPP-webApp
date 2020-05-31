@@ -31,7 +31,7 @@ export class IrrigationDevice extends Device{
         for (let i = 1; i < 11; i += 1) {
             if (Device.pinsUsed.includes(i)) {
                 if (i != this.pin)
-                    options += `<option>${i}</option>`
+                    options += `<option disabled>${i}</option>`
             } else {
                 options += `<option>${i}</option>`
             }
@@ -41,7 +41,6 @@ export class IrrigationDevice extends Device{
                 <input type="text" id="name" name="name" value="${this.name}">
 
                 <label for="pin">Pin: </label>           
-                <input type="number" id="pin" name="pin" value="${this.pin}">
                 <select name="pin" id="pin">
                     <option>${this.pin}<option>
                     ${options}
@@ -149,7 +148,7 @@ export class IrrigationDevice extends Device{
             console.log("form submit click");
             let data = {
                 id : this.id,
-                pin : document.getElementById("pin").value,
+                pin : Device.pinsConvertForPi(document.getElementById("pin").value),
                 name : document.getElementById("name").value,
                 notes : document.getElementById("notes").value,
                 cycleOnTimeHr : Array.from(document.getElementsByClassName("cycleOnTimeHr")).map(element => element.value),

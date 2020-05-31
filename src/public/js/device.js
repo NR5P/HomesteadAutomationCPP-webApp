@@ -3,7 +3,7 @@ export class Device {
     constructor(id, name, pin, notes, state) {
         this.id = id;
         this.name = name;
-        this.pin = Device.pinsConvert[pin];
+        this.pin = Device.pinsConvertForView[pin];
         this.notes = notes;
         this.state = state;
         Device.pinsUsed.push(this.pin);
@@ -31,7 +31,7 @@ export class Device {
     }
 };
 Device.pinsUsed = [];
-Device.pinsConvert = {
+Device.pinsConvertForView = {
     2 : 1,
     3 : 2,
     4 : 3,
@@ -42,4 +42,17 @@ Device.pinsConvert = {
     9 : 8,
     11 : 9,
     5 : 10
+}
+
+Device.pinsConvertForPi = {
+    1 : 2,
+    2 : 3,
+    3 : 4,
+    4 : 17,
+    5 : 27,
+    6 : 22,
+    7 : 10,
+    8 : 9,
+    9 : 11,
+    10 : 5
 }

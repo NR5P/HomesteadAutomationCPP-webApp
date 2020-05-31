@@ -90,7 +90,7 @@ header > div {
 /******************************************************************/
 
 /******for forms for entering settings information for devices*****/
-form > input {
+form > input, select {
     width: 80%;
     padding: 12px 20px;
     margin: 8px auto;
