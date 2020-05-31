@@ -3,9 +3,10 @@ export class Device {
     constructor(id, name, pin, notes, state) {
         this.id = id;
         this.name = name;
-        this.pin = pin;
+        this.pin = Device.pinsConvert[pin];
         this.notes = notes;
         this.state = state;
+        Device.pinsUsed.push(this.pin);
     }
 
     /**********************************************************************
@@ -29,3 +30,16 @@ export class Device {
         document.getElementById("main-area").appendChild(btnElement);
     }
 };
+Device.pinsUsed = [];
+Device.pinsConvert = {
+    2 : 1,
+    3 : 2,
+    4 : 3,
+    17 : 4,
+    27 : 5,
+    22 : 6,
+    10 : 7,
+    9 : 8,
+    11 : 9,
+    5 : 10
+}

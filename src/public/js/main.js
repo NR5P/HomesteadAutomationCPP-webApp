@@ -3,6 +3,7 @@ import {IrrigationDevice} from "./irrigation-device.js"
 
 let arrDevices = []
 
+
 // build the buttons on main page from db
 window.onload = () => {
     if (document.getElementById("main-area") !== null) {
