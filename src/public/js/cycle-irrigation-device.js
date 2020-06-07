@@ -28,13 +28,6 @@ export class CycleIrrigationDevice extends Device{
      * the device
      *********************************************************************/
     renderDeviceSettings(event) {
-        //console.log(event.target);
-        //event.target.innerHTML = "something";
-        //console.log(this.name); // does not know the name here
-        //this.name = "something";
-        //console.log(this.name); // does not know the name here
-        //event.target.innerHTML = "something";
-        //console.log(Device.deviceList);
         let formElement = document.createElement("form");
         let options = "";
         for (let i = 1; i < 11; i += 1) {
@@ -113,7 +106,6 @@ export class CycleIrrigationDevice extends Device{
                 blackoutStartTime : document.getElementById("blackoutStartTime").value,
                 blackoutStopTime : document.getElementById("blackoutStopTime").value
             }
-            console.log(data.id);
             fetch("/cycleIrrigation", {
                 method : "PUT",
                 headers : {
@@ -123,9 +115,6 @@ export class CycleIrrigationDevice extends Device{
             })
             .then(response => response.json())
             .then(data => {
-                if (data.status == 200)
-                    console.log("success");
-                    //TODO:
             })
             .catch(error => {
                 console.log(error);

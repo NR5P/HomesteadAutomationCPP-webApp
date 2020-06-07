@@ -23,9 +23,7 @@ window.onload = () => {
         return fetch("/api/cycleIrrigationDevices", {method: "GET"})
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 data.forEach(function(item) {
-                    console.log("pin number: " + item.pin);
                     arrDevices.push(new CycleIrrigationDevice(
                         item.id, item.name, item.pin, item.notes, item.state, item.cycleOnTimeHr, item.cycleOnTimeMin, 
                         item.cycleOnTimeSec, item.cycleOffTimeHr, item.cycleOffTimeMin, item.cycleOffTimeSec, 
@@ -58,7 +56,6 @@ window.onload = () => {
             const selectDiv = document.querySelector(".pin-numbers");
             let options = "<select name='pin' id='pin'>";
             if (selectDiv !== null && selectDiv !== undefined) {
-                console.log(Device.pinsUsed);
                 options += "<option></option>";
                 for (let i = 1; i < 11; i += 1) {
                     if (Device.pinsUsed.includes(i)) {

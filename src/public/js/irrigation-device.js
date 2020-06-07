@@ -13,6 +13,7 @@ export class IrrigationDevice extends Device{
         this.btnColor = "#0394fc";
         this.class = "irrigation-device-btn";
             
+        console.log("rendering button");
         this.renderBtn();
     }
 
@@ -145,7 +146,6 @@ export class IrrigationDevice extends Device{
         })
         
         document.getElementById("form-submit").addEventListener("click", () => {
-            console.log("form submit click");
             let data = {
                 id : this.id,
                 pin : Device.pinsConvertForPi(document.getElementById("pin").value),
@@ -163,7 +163,6 @@ export class IrrigationDevice extends Device{
                 saturday : document.getElementById("saturday").checked,
                 sunday : document.getElementById("sunday").checked
             }
-            console.log(data);
             fetch("/irrigation", {
                 method : "PUT",
                 headers : {
@@ -173,9 +172,7 @@ export class IrrigationDevice extends Device{
             })
             .then(response => response.json())
             .then(data => {
-                if (data.status == 200)
-                    console.log("success");
-                    //TODO:
+                //if (data.status == 200)
             })
             .catch(error => {
                 console.log(error);
@@ -205,7 +202,6 @@ export class IrrigationDevice extends Device{
         })
 
         document.querySelector(".daysToIrrigate").addEventListener("click", (e) => {
-            console.log(e.target);
             if (e.target.nextSibling.checked === true) {
                 e.target.nextSibling.checked = false;
             } else {

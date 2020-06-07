@@ -93,8 +93,8 @@ app.get("/api/irrigationDevices",(req,res) => {
                 cycleObject.cycleOnTimeArray.push(element.runTime);
                 cycleObject.startTimesArray.push(element.startTime);
             }
-            irrigationDevices.push(cycleObject); 
         });
+        irrigationDevices.push(cycleObject); 
         res.json(irrigationDevices);
     })
 })
