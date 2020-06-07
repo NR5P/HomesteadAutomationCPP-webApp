@@ -2,11 +2,28 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const path = require("path");
+const io = require("socket.io-client");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const {singleToDoubleDigit} = require("./customMiddleware/customMiddleware.js");
 
+const pinsConvertForPi = {
+    1 : 2,
+    2 : 3,
+    3 : 4,
+    4 : 17,
+    5 : 27,
+    6 : 22,
+    7 : 10,
+    8 : 9,
+    9 : 11,
+    10 : 5
+}
+
+
 const app = express();
+
+ioClient = io.connect("http://localhost:1234");
 
 //connect to database
 const db = mysql.createConnection({
@@ -46,6 +63,7 @@ app.use(singleToDoubleDigit);
 app.use(express.static(path.join(__dirname, "public"))); // public folders
 
 app.get("/", (req, res) => {
+    ioClient.emit("msg", "testing");
     res.render("index");
 });
 
@@ -102,7 +120,7 @@ app.post("/irrigation", (req, res) => {
     console.log(daysToIrrigateString);
 
    const irrigationData = {
-       pin : req.body.pin,
+       pin : pinsConvertForPi[req.body.pin],
        name : req.body.name,
        notes : req.body.notes,
        state : req.body.state,
@@ -279,7 +297,7 @@ app.get("/api/cycleIrrigationDevices", (req, res) => {
 
 app.post("/cycleIrrigation", (req, res) => {
     const cycleIrrigationData = {
-        pin : req.body.pin,
+        pin : pinsConvertForPi[req.body.pin],
         name : req.body.name,
         notes : req.body.notes,
         state : req.body.state,

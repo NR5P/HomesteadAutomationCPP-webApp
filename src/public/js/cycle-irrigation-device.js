@@ -100,9 +100,9 @@ export class CycleIrrigationDevice extends Device{
         }
         document.getElementById("form-submit").addEventListener("click", () => {
             let data = {
-                id : Device.pinsConvertForPi(this.id),
+                id : this.id,
                 name : document.getElementById("name").value,
-                pin : document.getElementById("pin").value,
+                pin : Device.pinsConvertForPi[document.getElementById("pin").value],
                 notes : document.getElementById("notes").value,
                 cycleOnTimeHr : document.getElementById("cycleOnTimeHr").value,
                 cycleOnTimeMin : document.getElementById("cycleOnTimeMin").value,
